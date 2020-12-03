@@ -21,6 +21,10 @@ if(ANDROID)
     src/ui/mainwindow.cpp
     src/ui/mainwindow.h
     src/ui/mainwindow.ui
+    src/models/neutrinotrack.cpp
+    src/models/neutrinotrack.h
+    src/models/neutrinopoint.cpp
+    src/models/neutrinopoint.h
     ${TS_FILES}
   )
 else()
@@ -29,6 +33,10 @@ else()
     src/ui/mainwindow.cpp
     src/ui/mainwindow.h
     src/ui/mainwindow.ui
+    src/models/neutrinotrack.cpp
+    src/models/neutrinotrack.h
+    src/models/neutrinopoint.cpp
+    src/models/neutrinopoint.h
     ${TS_FILES}
   )
 endif()
