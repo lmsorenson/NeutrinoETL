@@ -10,11 +10,14 @@ class NeutrinoTrack : QObject
 
 public:
     NeutrinoTrack(int id);
-    virtual ~NeutrinoTrack() = default;
+    virtual ~NeutrinoTrack();
 
-    void to_disk(QString path);
+    QJsonObject to_json();
     void add_point(NeutrinoPoint *point);
 
+    void print();
+
+private:
     int id_;
     QList<NeutrinoPoint *> points_;
 };

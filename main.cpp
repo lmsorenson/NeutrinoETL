@@ -4,86 +4,58 @@
 #include <QDebug>
 #include <QFile>
 #include <QTextCodec>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QJsonDocument>
 
-#include <src/models/neutrinotrack.h>
-
-void on_new_track(NeutrinoTrack **track, QString data, QString path);
-void on_new_point(NeutrinoTrack * track, QString data);
+#include <src/strategies/neutrinoeventdeserializerv1.h>
 
 int main(int argc, char *argv[])
 {
+    if (argc < 3) return 1;
+    auto deserializer = new NeutrinoEventDeserializerV1();
+
+    auto read_path = argv[argc-2];
+    auto write_path = argv[argc-1];
+
     qDebug() << "argc " << argc;
-    for(int i = 0; i < argc; ++i)
+    for(int i = 0; i < argc;)
     {
         qDebug() << "argument " << i + 1 << ": " << argv[i];
+
+        ++i;
     }
 
-    QFile file("../sample-data/information.txt");
+    QFile file(read_path);
     file.open(QIODevice::ReadOnly | QIODevice::Text);
 
-    auto text = file.readAll();
-    auto array = text.split('\n');
-
-
-    NeutrinoTrack *current_track = nullptr;
-    for(int i = 0; i < array.size(); ++i)
+    if (file.isOpen())
     {
-        auto id_prefix = QString("track ID");
-        auto prefix = QString("Point no");
-        auto record = QString(array[i]).trimmed();
+        auto events = deserializer->deserialize(file.readAll());
 
-        if (record.startsWith(id_prefix))
-            on_new_track(&current_track, QStringRef(&record, id_prefix.size(), record.size() - id_prefix.size()).toString(), "");
+        QJsonArray json_array;
 
-        if (record.startsWith(prefix))
-            on_new_point(current_track, QStringRef(&record, prefix.size(), record.size() - prefix.size()).toString());
+        for (int i=0; i < events.size(); ++i)
+            json_array.append(events[i]->to_json());
+
+        QJsonDocument document(json_array);
+        QFile out_file(write_path);
+        out_file.open(QIODevice::WriteOnly | QIODevice::Text);
+
+        QTextStream out(&out_file);
+        out << document.toJson();
+        out_file.close();
+
+        QApplication a(argc, argv);
+        //    MainWindow w;
+        //    w.show();
+        //    return a.exec();
+
+        return 0;
     }
-
-    QApplication a(argc, argv);
-//    MainWindow w;
-//    w.show();
-//    return a.exec();
-
-    return 0;
+    else
+    {
+        return 1;
+    }
 }
 
-void on_new_track(NeutrinoTrack **track, QString data, QString path)
-{
-    if (track != nullptr)
-    {
-        (*track)->to_disk(path);
-        delete *track;
-        *track = nullptr;
-    }
-
-    bool ok;
-    auto id = data.trimmed().toInt(&ok);
-
-    if (ok)
-        *track = new NeutrinoTrack(id);
-}
-
-void on_new_point(NeutrinoTrack *track, QString data)
-{
-    if (track == nullptr) return;
-
-    bool ok;
-    QMap<QString, float> map = QMap<QString, float>();
-    auto parts = data.trimmed().split(" ");
-
-    float point_no = parts.takeFirst().toFloat(&ok);
-    if (!ok) return;
-
-    map.insert("Point no", point_no);
-
-    for(int i = 0; i+1 < parts.size(); i += 2)
-    {
-        auto label = parts[i];
-        float value = parts[i+1].toFloat(&ok);
-        if (!ok) return;
-
-        map.insert(label, value);
-    }
-
-    track->add_point(new NeutrinoPoint(map));
-}

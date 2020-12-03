@@ -25,6 +25,10 @@ if(ANDROID)
     src/models/neutrinotrack.h
     src/models/neutrinopoint.cpp
     src/models/neutrinopoint.h
+    src/strategies/deserialize.cpp
+    src/strategies/deserialize.h
+    src/strategies/neutrinoeventdeserializerv1.cpp
+    src/strategies/neutrinoeventdeserializerv1.h
     ${TS_FILES}
   )
 else()
@@ -33,10 +37,16 @@ else()
     src/ui/mainwindow.cpp
     src/ui/mainwindow.h
     src/ui/mainwindow.ui
+    src/models/neutrinoevent.cpp
+    src/models/neutrinoevent.h
     src/models/neutrinotrack.cpp
     src/models/neutrinotrack.h
     src/models/neutrinopoint.cpp
     src/models/neutrinopoint.h
+    src/strategies/deserialize.cpp
+    src/strategies/deserialize.h
+    src/strategies/neutrinoeventdeserializerv1.cpp
+    src/strategies/neutrinoeventdeserializerv1.h
     ${TS_FILES}
   )
 endif()

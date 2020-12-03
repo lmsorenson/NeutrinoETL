@@ -10,6 +10,10 @@ public:
     NeutrinoPoint(QMap<QString, float> point_map);
     virtual ~NeutrinoPoint() = default;
 
+    QJsonObject to_json();
+    void print();
+
+private:
     float id_, x_, y_, z_, charge_;
 };
 
