@@ -7,8 +7,10 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QSurfaceFormat>
 
 #include <src/strategies/neutrinoeventdeserializerv1.h>
+#include <src/ui/shaders/openglviewport.h>
 
 int main(int argc, char *argv[])
 {
@@ -46,10 +48,16 @@ int main(int argc, char *argv[])
         out << document.toJson();
         out_file.close();
 
-        QApplication a(argc, argv);
-        //    MainWindow w;
-        //    w.show();
-        //    return a.exec();
+        if (true)// if the flag is set
+        {
+            QSurfaceFormat format;
+            format.setDepthBufferSize(24);
+            QSurfaceFormat::setDefaultFormat(format);
+            QApplication a(argc, argv);
+            MainWindow window;
+            window.show();
+            return a.exec();
+        }
 
         return 0;
     }
