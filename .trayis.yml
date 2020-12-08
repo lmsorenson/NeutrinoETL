@@ -37,9 +37,9 @@ script:
 #    cp -a "/Volumes/ReleaseInstaller-${DEPLOY_VERSION}-Darwin/ReleaseInstaller.app" ReleaseInstaller.app
 #    hdiutil detach "/Volumes/ReleaseInstaller-${DEPLOY_VERSION}-Darwin"
 #  - zip -r ReleaseInstaller.zip ReleaseInstaller.app
-before_deploy:
-  - git config --local user.name "lmsorenson"
-  - git config --local user.email "lsorenson20@gmail.com"
+#before_deploy:
+#  - git config --local user.name "lmsorenson"
+#  - git config --local user.email "lsorenson20@gmail.com"
 #deploy:
 #  provider: releases
 #  api_key: ${GITHUB_TOKEN}
