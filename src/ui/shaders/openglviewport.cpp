@@ -5,7 +5,7 @@
 
 #include <cmath>
 
-OpenGLViewport::OpenGLViewport() : QOpenGLWidget(), engine_(nullptr), texture_(nullptr), camera_distance_(8.0f)
+OpenGLViewport::OpenGLViewport() : QOpenGLWidget(), engine_(nullptr), texture_(nullptr), camera_distance_(5.0f)
 {
 
 }
@@ -89,7 +89,7 @@ void OpenGLViewport::init_shaders()
 
 void OpenGLViewport::init_textures()
 {
-    auto image = QImage("../src/ui/shaders/cufbe.png");
+    auto image = QImage("../src/ui/shaders/cube.png");
     texture_ = new QOpenGLTexture(image.mirrored());
 
     texture_->setMinificationFilter(QOpenGLTexture::Nearest);
@@ -101,7 +101,7 @@ void OpenGLViewport::init_textures()
 
 void OpenGLViewport::mousePressEvent(QMouseEvent *e)
 {
-//    mouse_press_position_ = QVector2D(e->localPos());
+    mouse_press_position_ = QVector2D(e->localPos());
 }
 
 void OpenGLViewport::mouseReleaseEvent(QMouseEvent *e)
@@ -112,12 +112,13 @@ void OpenGLViewport::mouseMoveEvent(QMouseEvent *e)
 {
     qDebug() << e->localPos() << QWidget::size();
 
-    QVector2D diff = QVector2D(e->localPos()) - mouse_press_position_;
+    QVector2D diff = (QVector2D(e->localPos()) - mouse_press_position_) / 20;
+
     mouse_press_position_ = QVector2D(e->localPos());
 
     rotation_axis_ = QVector3D(diff.y(), diff.x(), 0.0).normalized();
 
-    angular_speed_ = atan((diff.length()*5000)/camera_distance_);
+    angular_speed_ = atan(diff.length() / camera_distance_) * (180 / M_PI);
 }
 
 void OpenGLViewport::timerEvent(QTimerEvent *e)
