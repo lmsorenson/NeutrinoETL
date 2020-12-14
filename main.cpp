@@ -38,9 +38,15 @@ int main(int argc, char *argv[])
         QJsonArray json_array;
 
         for (int i=0; i < events.size(); ++i)
+        {
             json_array.append(events[i]->to_json());
+            qDebug() << "Max Charge for event " << i << ": " << events[i]->get_max_charge();
+        }
 
-        QJsonDocument document(json_array);
+        QJsonObject object;
+        object.insert("EventList", QJsonValue::fromVariant(json_array));
+
+        QJsonDocument document(object);
         QFile out_file(write_path);
         out_file.open(QIODevice::WriteOnly | QIODevice::Text);
 

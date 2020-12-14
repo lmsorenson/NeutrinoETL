@@ -49,15 +49,25 @@ void OpenGLViewport::paintGL()
 
     texture_->bind();
 
-    QMatrix4x4 view;
-    view.translate(0.0, 0.0, -1 * camera_distance_);
-    view.rotate(rotation_);
+    {
+        QMatrix4x4 view;
+        view.translate(-1.5, 0.0, -1 * camera_distance_);
+        view.rotate(rotation_);
+        program_.setUniformValue("mvp_matrix", projection_ * view);
+        program_.setUniformValue("texture", 0);
 
-    program_.setUniformValue("mvp_matrix", projection_ * view);
+        engine_->draw_geometry(&program_);
+    }
 
-    program_.setUniformValue("texture", 0);
+    {
+        QMatrix4x4 view;
+        view.translate(1.5, 0.0, -1 * camera_distance_);
+        view.rotate(rotation_);
+        program_.setUniformValue("mvp_matrix", projection_ * view);
+        program_.setUniformValue("texture", 0);
 
-    engine_->draw_geometry(&program_);
+        engine_->draw_geometry(&program_);
+    }
 }
 
 void OpenGLViewport::init_shaders()

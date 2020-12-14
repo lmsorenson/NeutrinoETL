@@ -48,3 +48,16 @@ void NeutrinoTrack::print()
         points_[i]->print();
     }
 }
+
+float NeutrinoTrack::get_max_charge()
+{
+    float max_charge = 0;
+    for (int i=0; i < points_.size(); ++i)
+    {
+        float point_charge = points_[i]->get_max_charge();
+        if (point_charge > max_charge)
+            max_charge = point_charge;
+    }
+
+    return max_charge;
+}

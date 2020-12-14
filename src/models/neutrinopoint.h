@@ -13,7 +13,9 @@ public:
     QJsonObject to_json();
     void print();
 
+    float get_max_charge();
+
 private:
-    float id_, x_, y_, z_, charge_;
+    float id_, x_, y_, z_, charge_, max_charge_;
 };
 

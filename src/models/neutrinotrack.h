@@ -15,6 +15,8 @@ public:
     QJsonObject to_json();
     void add_point(NeutrinoPoint *point);
 
+    float get_max_charge();
+
     void print();
 
 private:

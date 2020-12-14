@@ -59,3 +59,16 @@ void NeutrinoEvent::print()
         tracks_[i]->print();
     }
 }
+
+float NeutrinoEvent::get_max_charge()
+{
+    float max_charge = 0;
+    for (int i=0; i < tracks_.size(); ++i)
+    {
+        float max_track_charge = tracks_[i]->get_max_charge();
+        if (max_track_charge > max_charge)
+            max_charge = max_track_charge;
+    }
+
+    return max_charge;
+}

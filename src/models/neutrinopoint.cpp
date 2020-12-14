@@ -9,6 +9,7 @@ NeutrinoPoint::NeutrinoPoint(QMap<QString, float> point_map)
     , y_(point_map["TY"])
     , z_(point_map["TZ"])
     , charge_(point_map["charge"])
+    , max_charge_(0)
 {
 }
 
@@ -19,6 +20,9 @@ void NeutrinoPoint::print()
 
 QJsonObject NeutrinoPoint::to_json()
 {
+    if (charge_ > max_charge_)
+        max_charge_ = charge_;
+
     QJsonObject object;
     object.insert("Id", QJsonValue::fromVariant(id_));
     object.insert("X", QJsonValue::fromVariant(x_));
@@ -26,4 +30,9 @@ QJsonObject NeutrinoPoint::to_json()
     object.insert("Z", QJsonValue::fromVariant(z_));
     object.insert("Charge", QJsonValue::fromVariant(charge_));
     return object;
+}
+
+float NeutrinoPoint::get_max_charge()
+{
+    return max_charge_;
 }

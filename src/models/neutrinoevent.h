@@ -15,6 +15,8 @@ public:
     QJsonObject to_json();
     void print();
 
+    float get_max_charge();
+
 private:
     int id_;
     QList<NeutrinoTrack *> tracks_;
