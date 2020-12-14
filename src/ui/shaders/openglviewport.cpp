@@ -5,7 +5,7 @@
 
 #include <cmath>
 
-OpenGLViewport::OpenGLViewport() : QOpenGLWidget(), engine_(nullptr), texture_(nullptr), camera_distance_(5.0f)
+OpenGLViewport::OpenGLViewport() : QOpenGLWidget(), engine_(nullptr), texture_(nullptr), camera_distance_(6.0f)
 {
 
 }
@@ -50,22 +50,28 @@ void OpenGLViewport::paintGL()
     texture_->bind();
 
     {
-        QMatrix4x4 view;
-        view.translate(-1.5, 0.0, -1 * camera_distance_);
-        view.rotate(rotation_);
-        program_.setUniformValue("mvp_matrix", projection_ * view);
-        program_.setUniformValue("texture", 0);
+        QMatrix4x4 model;
+        model.translate(-1.5f, 0.0f, 0.0f);
 
+        QMatrix4x4 view;
+        view.translate(0.0, 0.0, -1 * camera_distance_);
+        view.rotate(rotation_);
+
+        program_.setUniformValue("mvp_matrix", projection_ * view * model);
+        program_.setUniformValue("texture", 0);
         engine_->draw_geometry(&program_);
     }
 
     {
-        QMatrix4x4 view;
-        view.translate(1.5, 0.0, -1 * camera_distance_);
-        view.rotate(rotation_);
-        program_.setUniformValue("mvp_matrix", projection_ * view);
-        program_.setUniformValue("texture", 0);
+        QMatrix4x4 model;
+        model.translate(1.5f, 0.0f, 0.0f);
 
+        QMatrix4x4 view;
+        view.translate(0.0, 0.0, -1 * camera_distance_);
+        view.rotate(rotation_);
+
+        program_.setUniformValue("mvp_matrix", projection_ * view * model);
+        program_.setUniformValue("texture", 0);
         engine_->draw_geometry(&program_);
     }
 }
