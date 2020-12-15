@@ -14,6 +14,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void add_points(QList<class NeutrinoPoint*> points);
+
 private:
     Ui::MainWindow *ui;
+
+    class Viewport *viewport_, *side_viewport_;
 };

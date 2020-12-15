@@ -60,6 +60,11 @@ void NeutrinoEvent::print()
     }
 }
 
+QList<NeutrinoTrack *> NeutrinoEvent::get_tracks() const
+{
+    return tracks_;
+}
+
 float NeutrinoEvent::get_max_charge()
 {
     float max_charge = 0;

@@ -49,6 +49,11 @@ void NeutrinoTrack::print()
     }
 }
 
+QList<NeutrinoPoint*> NeutrinoTrack::get_points()
+{
+    return points_;
+}
+
 float NeutrinoTrack::get_max_charge()
 {
     float max_charge = 0;

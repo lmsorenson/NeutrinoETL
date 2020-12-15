@@ -31,6 +31,8 @@ if(ANDROID)
     src/ui/shaders/fragment.fsh
     src/ui/geometry/vertex.cpp
     src/ui/geometry/vertex.h
+    src/ui/geometry/mesh.cpp
+    src/ui/geometry/mesh.h
     src/ui/geometry/cube.cpp
     src/ui/geometry/cube.h
     src/models/neutrinotrack.cpp
@@ -57,6 +59,8 @@ else()
     src/ui/shaders/fragment.fsh
     src/ui/geometry/vertex.cpp
     src/ui/geometry/vertex.h
+    src/ui/geometry/mesh.cpp
+    src/ui/geometry/mesh.h
     src/ui/geometry/cube.cpp
     src/ui/geometry/cube.h
     src/models/neutrinoevent.cpp

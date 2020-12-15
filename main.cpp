@@ -62,6 +62,15 @@ int main(int argc, char *argv[])
             QApplication a(argc, argv);
             MainWindow window;
             window.show();
+
+            QList<NeutrinoPoint*> list;
+
+            for(auto track : events.first()->get_tracks())
+            {
+                list.append(track->get_points());
+            }
+
+            window.add_points(list);
             return a.exec();
         }
 

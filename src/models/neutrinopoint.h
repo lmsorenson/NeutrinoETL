@@ -14,6 +14,11 @@ public:
     void print();
 
     float get_max_charge();
+public:
+    float x() const;
+    float y() const;
+    float z() const;
+    float charge() const;
 
 private:
     float id_, x_, y_, z_, charge_, max_charge_;

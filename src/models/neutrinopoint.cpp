@@ -36,3 +36,8 @@ float NeutrinoPoint::get_max_charge()
 {
     return max_charge_;
 }
+
+float NeutrinoPoint::x() const { return x_; }
+float NeutrinoPoint::y() const { return y_; }
+float NeutrinoPoint::z() const { return z_; }
+float NeutrinoPoint::charge() const { return z_; }

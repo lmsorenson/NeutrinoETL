@@ -7,13 +7,13 @@
 #include <QBasicTimer>
 #include "geometryengine.h"
 
-class OpenGLViewport : public QOpenGLWidget, protected QOpenGLFunctions
+class Viewport : public QOpenGLWidget, protected QOpenGLFunctions
 {
     Q_OBJECT
 public:
     using QOpenGLWidget::QOpenGLWidget;
-    explicit OpenGLViewport();
-    virtual ~OpenGLViewport();
+    explicit Viewport();
+    virtual ~Viewport();
 
     void mousePressEvent(QMouseEvent *e) override;
     void mouseMoveEvent(QMouseEvent *e) override;
@@ -27,6 +27,8 @@ public:
     void init_shaders();
     void init_textures();
 
+    void create_point(QVector3D position, float scale);
+
 private:
     QBasicTimer timer_;
     QOpenGLShaderProgram program_;
@@ -34,8 +36,6 @@ private:
     QOpenGLTexture *texture_;
 
     float camera_distance_;
-    QMatrix4x4 model_;
-    QMatrix4x4 view_;
     QMatrix4x4 projection_;
 
     QQuaternion rotation_;

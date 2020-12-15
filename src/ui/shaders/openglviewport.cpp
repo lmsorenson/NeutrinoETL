@@ -1,25 +1,32 @@
 #include "openglviewport.h"
 
+#include <memory>
 #include <QOpenGLFunctions>
 #include <QMouseEvent>
+#include <src/ui/geometry/cube.h>
 
 #include <cmath>
 
-OpenGLViewport::OpenGLViewport() : QOpenGLWidget(), engine_(nullptr), texture_(nullptr), camera_distance_(6.0f)
+Viewport::Viewport()
+: QOpenGLWidget()
+, engine_(nullptr)
+, texture_(nullptr)
+, camera_distance_(6.0f)
 {
 
 }
 
-OpenGLViewport::~OpenGLViewport()
+Viewport::~Viewport()
 {
-
+    delete engine_;
+    delete texture_;
 }
 
-void OpenGLViewport::initializeGL()
+void Viewport::initializeGL()
 {
     initializeOpenGLFunctions();
 
-    glClearColor(0.5,0.5,0.5,1);
+    glClearColor(0,0,0,0);
 
     init_shaders();
     init_textures();
@@ -32,51 +39,31 @@ void OpenGLViewport::initializeGL()
     timer_.start(12, this);
 }
 
-void OpenGLViewport::resizeGL(int w, int h)
+void Viewport::resizeGL(int w, int h)
 {
     qreal aspect = qreal(w) / qreal(h ? h : 1);
 
-    const qreal zNear = 1.0, zFar = 10.0, fov = 45.0;
+    const qreal zNear = 1.0, zFar = 20000.0, fov = 45.0;
 
     projection_.setToIdentity();
 
     projection_.perspective(fov, aspect, zNear, zFar);
 }
 
-void OpenGLViewport::paintGL()
+void Viewport::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     texture_->bind();
 
-    {
-        QMatrix4x4 model;
-        model.translate(-1.5f, 0.0f, 0.0f);
+    QMatrix4x4 view;
+    view.translate(0.0, 0.0, -1 * camera_distance_);
+    view.rotate(rotation_);
 
-        QMatrix4x4 view;
-        view.translate(0.0, 0.0, -1 * camera_distance_);
-        view.rotate(rotation_);
-
-        program_.setUniformValue("mvp_matrix", projection_ * view * model);
-        program_.setUniformValue("texture", 0);
-        engine_->draw_geometry(&program_);
-    }
-
-    {
-        QMatrix4x4 model;
-        model.translate(1.5f, 0.0f, 0.0f);
-
-        QMatrix4x4 view;
-        view.translate(0.0, 0.0, -1 * camera_distance_);
-        view.rotate(rotation_);
-
-        program_.setUniformValue("mvp_matrix", projection_ * view * model);
-        program_.setUniformValue("texture", 0);
-        engine_->draw_geometry(&program_);
-    }
+    engine_->draw_geometry(&program_, projection_ * view);
 }
 
-void OpenGLViewport::init_shaders()
+void Viewport::init_shaders()
 {
     if (!program_.addShaderFromSourceFile(QOpenGLShader::Vertex, "../src/ui/shaders/vertex.vsh"))
     {
@@ -103,7 +90,7 @@ void OpenGLViewport::init_shaders()
     }
 }
 
-void OpenGLViewport::init_textures()
+void Viewport::init_textures()
 {
     auto image = QImage("../src/ui/shaders/cube.png");
     texture_ = new QOpenGLTexture(image.mirrored());
@@ -115,16 +102,21 @@ void OpenGLViewport::init_textures()
     texture_->setWrapMode(QOpenGLTexture::Repeat);
 }
 
-void OpenGLViewport::mousePressEvent(QMouseEvent *e)
+void Viewport::create_point(QVector3D position, float scale)
+{
+    engine_->add_geometry(new Cube(position, QVector3D(scale, scale, scale)));
+}
+
+void Viewport::mousePressEvent(QMouseEvent *e)
 {
     mouse_press_position_ = QVector2D(e->localPos());
 }
 
-void OpenGLViewport::mouseReleaseEvent(QMouseEvent *e)
+void Viewport::mouseReleaseEvent(QMouseEvent *e)
 {
 }
 
-void OpenGLViewport::mouseMoveEvent(QMouseEvent *e)
+void Viewport::mouseMoveEvent(QMouseEvent *e)
 {
     qDebug() << e->localPos() << QWidget::size();
 
@@ -137,7 +129,7 @@ void OpenGLViewport::mouseMoveEvent(QMouseEvent *e)
     angular_speed_ = atan(diff.length() / camera_distance_) * (180 / M_PI);
 }
 
-void OpenGLViewport::timerEvent(QTimerEvent *e)
+void Viewport::timerEvent(QTimerEvent *e)
 {
     rotation_ = QQuaternion::fromAxisAndAngle(rotation_axis_, angular_speed_) * rotation_;
 
