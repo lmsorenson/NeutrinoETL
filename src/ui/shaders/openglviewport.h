@@ -27,6 +27,7 @@ public:
     void init_shaders();
     void init_textures();
 
+    void set_engine(GeometryEngine *engine);
     void create_point(QVector3D position, float scale);
 
 private:

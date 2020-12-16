@@ -13,11 +13,11 @@ Viewport::Viewport()
 , texture_(nullptr)
 , camera_distance_(6.0f)
 {
-
 }
 
 Viewport::~Viewport()
 {
+
     delete engine_;
     delete texture_;
 }
@@ -34,7 +34,8 @@ void Viewport::initializeGL()
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
 
-    engine_ = new GeometryEngine();
+    if (!engine_)
+        engine_ = new GeometryEngine();
 
     timer_.start(12, this);
 }
@@ -100,6 +101,12 @@ void Viewport::init_textures()
     texture_->setMagnificationFilter(QOpenGLTexture::Linear);
 
     texture_->setWrapMode(QOpenGLTexture::Repeat);
+}
+
+void Viewport::set_engine(GeometryEngine *engine)
+{
+    if (engine)
+        engine_ = engine;
 }
 
 void Viewport::create_point(QVector3D position, float scale)
