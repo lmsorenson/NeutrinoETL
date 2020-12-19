@@ -39,7 +39,7 @@ if(ANDROID)
     src/models/neutrinotrack.h
     src/models/neutrinopoint.cpp
     src/models/neutrinopoint.h
-    src/strategies/deserialize.cpp
+          src/strategies/deserialize.cpp
     src/strategies/deserialize.h
     src/strategies/neutrinoeventdeserializerv1.cpp
     src/strategies/neutrinoeventdeserializerv1.h
@@ -69,7 +69,7 @@ else()
     src/models/neutrinotrack.h
     src/models/neutrinopoint.cpp
     src/models/neutrinopoint.h
-    src/strategies/deserialize.cpp
+          src/strategies/deserialize.cpp
     src/strategies/deserialize.h
     src/strategies/neutrinoeventdeserializerv1.cpp
     src/strategies/neutrinoeventdeserializerv1.h

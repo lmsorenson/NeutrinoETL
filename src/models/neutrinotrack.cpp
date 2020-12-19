@@ -4,7 +4,9 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-NeutrinoTrack::NeutrinoTrack(int id) : id_(id), points_(QList<NeutrinoPoint *>())
+NeutrinoTrack::NeutrinoTrack(int id)
+: id_(id)
+, points_(QList<NeutrinoPoint *>())
 {
 
 }
@@ -57,9 +59,10 @@ QList<NeutrinoPoint*> NeutrinoTrack::get_points()
 float NeutrinoTrack::get_max_charge()
 {
     float max_charge = 0;
+
     for (int i=0; i < points_.size(); ++i)
     {
-        float point_charge = points_[i]->get_max_charge();
+        float point_charge = points_[i]->charge();
         if (point_charge > max_charge)
             max_charge = point_charge;
     }

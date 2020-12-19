@@ -2,9 +2,11 @@
 
 #include <QObject>
 #include <QList>
+#include <QVector3D>
 #include <src/models/neutrinopoint.h>
 
-class NeutrinoTrack : QObject
+
+class NeutrinoTrack : public QObject
 {
     Q_OBJECT
 
@@ -17,10 +19,9 @@ public:
 
     QList<NeutrinoPoint*> get_points();
     float get_max_charge();
-
     void print();
 
 private:
     int id_;
-    QList<NeutrinoPoint *> points_;
+    QList<NeutrinoPoint*> points_;
 };

@@ -3,14 +3,15 @@
 #include <QDebug>
 #include <QJsonObject>
 
-NeutrinoPoint::NeutrinoPoint(QMap<QString, float> point_map)
-    : id_(point_map["Point no"])
-    , x_(point_map["TX"])
-    , y_(point_map["TY"])
-    , z_(point_map["TZ"])
-    , charge_(point_map["charge"])
-    , max_charge_(0)
+NeutrinoPoint::NeutrinoPoint(QMap<QString, double> point_map)
+    : id_(-1), x_(-1), y_(-1), z_(-1), charge_(-1)
 {
+    id_ = point_map["Point no"];
+    x_ = point_map["TX"];
+    y_ = point_map["TY"];
+    z_ = point_map["TZ"];
+    charge_ = point_map["charge"];
+
 }
 
 void NeutrinoPoint::print()
@@ -20,24 +21,17 @@ void NeutrinoPoint::print()
 
 QJsonObject NeutrinoPoint::to_json()
 {
-    if (charge_ > max_charge_)
-        max_charge_ = charge_;
-
     QJsonObject object;
-    object.insert("Id", QJsonValue::fromVariant(id_));
-    object.insert("X", QJsonValue::fromVariant(x_));
-    object.insert("Y", QJsonValue::fromVariant(y_));
-    object.insert("Z", QJsonValue::fromVariant(z_));
-    object.insert("Charge", QJsonValue::fromVariant(charge_));
+    object.insert("Id", QJsonValue(id_));
+    object.insert("X", QJsonValue(x_));
+    object.insert("Y", QJsonValue(y_));
+    object.insert("Z", QJsonValue(z_));
+    object.insert("Charge", QJsonValue(charge_));
+
     return object;
 }
 
-float NeutrinoPoint::get_max_charge()
-{
-    return max_charge_;
-}
-
-float NeutrinoPoint::x() const { return x_; }
-float NeutrinoPoint::y() const { return y_; }
-float NeutrinoPoint::z() const { return z_; }
-float NeutrinoPoint::charge() const { return z_; }
+double NeutrinoPoint::x() const { return x_; }
+double NeutrinoPoint::y() const { return y_; }
+double NeutrinoPoint::z() const { return z_; }
+double NeutrinoPoint::charge() const { return z_; }

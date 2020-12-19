@@ -21,7 +21,6 @@ public:
 private:
     int id_;
     QList<NeutrinoTrack *> tracks_;
-
 signals:
 
 };

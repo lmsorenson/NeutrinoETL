@@ -7,20 +7,19 @@ class NeutrinoPoint : QObject
 {
     Q_OBJECT
 public:
-    NeutrinoPoint(QMap<QString, float> point_map);
+    NeutrinoPoint(QMap<QString, double> point_map);
     virtual ~NeutrinoPoint() = default;
 
     QJsonObject to_json();
     void print();
 
-    float get_max_charge();
 public:
-    float x() const;
-    float y() const;
-    float z() const;
-    float charge() const;
+    double x() const;
+    double y() const;
+    double z() const;
+    double charge() const;
 
 private:
-    float id_, x_, y_, z_, charge_, max_charge_;
+    double id_, x_, y_, z_, charge_;
 };
 

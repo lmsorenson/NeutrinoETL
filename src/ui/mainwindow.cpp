@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 
 #include <src/ui/shaders/openglviewport.h>
+#include <src/ui/geometry/cube.h>
 #include <src/models/neutrinopoint.h>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -10,8 +11,13 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+
+
     viewport_ = new Viewport();
     side_viewport_ = new Viewport();
+
+
+
     ui->gridLayout->addWidget(viewport_);
     ui->gridLayout->addWidget(side_viewport_);
 }
@@ -22,9 +28,12 @@ void MainWindow::add_points(QList<NeutrinoPoint*> points)
 //    {
 //        viewport_->create_point(QVector3D(point->x(), point->y(), point->z()), point->charge() * .001);
 //    }
+    GeometryEngine *engine = new GeometryEngine();
 
-    viewport_->create_point(QVector3D(), 1);
-    side_viewport_->create_point(QVector3D(), 1);
+    viewport_->set_engine(engine);
+    side_viewport_->set_engine(engine);
+
+    viewport_->create_point(QVector3D(0, 0, 0), 1);
 }
 
 
