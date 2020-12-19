@@ -36,7 +36,7 @@ QList<NeutrinoPoint*> NeutrinoTrack::get_points() const
 
 double NeutrinoTrack::get_max_charge() const
 {
-    float max_charge = 0;
+    double max_charge = 0;
 
     for (int i=0; i < points_.size(); ++i)
     {
@@ -46,6 +46,29 @@ double NeutrinoTrack::get_max_charge() const
     }
 
     return max_charge;
+}
+
+double NeutrinoTrack::total_charge() const
+{
+    double total_charge = 0;
+
+    for (int i=0; i < points_.size(); ++i)
+        total_charge += points_[i]->charge();
+
+    return total_charge;
+}
+
+double NeutrinoTrack::track_density() const
+{
+    double x_dimension = x_axis_extremes_.second->x() - x_axis_extremes_.first->x();
+    double y_dimension = y_axis_extremes_.second->y() - y_axis_extremes_.first->y();
+    double z_dimension = z_axis_extremes_.second->z() - z_axis_extremes_.first->z();
+
+    double track_volume = x_dimension * y_dimension * z_dimension;
+
+    double track_density = total_charge() / track_volume;
+
+    return track_density;
 }
 
 bool is_upper_extreme(NeutrinoPoint* point, double (NeutrinoPoint::*get_axis_value)() const, NeutrinoPoint* axis_max_point)
@@ -111,6 +134,8 @@ QJsonObject NeutrinoTrack::to_json() const
     meta.insert("YAxisMaximum", y_axis_extremes_.second->y());
     meta.insert("ZAxisMinimum", z_axis_extremes_.first->z());
     meta.insert("ZAxisMaximum", z_axis_extremes_.second->z());
+    meta.insert("TotalCharge", this->total_charge());
+    meta.insert("TrackDensity", this->track_density());
 
     object.insert("Metadata", meta);
 

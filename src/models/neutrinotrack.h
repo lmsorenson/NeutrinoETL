@@ -19,6 +19,8 @@ public:
 
     QList<NeutrinoPoint*> get_points() const;
     double get_max_charge() const;
+    double total_charge() const;
+    double track_density() const;
     void calculate_extremes();
 
     void print() const;
