@@ -1,6 +1,5 @@
 #include "neutrinoevent.h"
 
-#include <QDebug>
 #include <QJsonObject>
 #include <QJsonArray>
 
@@ -25,7 +24,15 @@ void NeutrinoEvent::add_track(NeutrinoTrack *track)
     tracks_.append(track);
 }
 
-NeutrinoTrack * NeutrinoEvent::last()
+void NeutrinoEvent::calculate_extremes()
+{
+    for (int i=0; i < tracks_.size(); ++i)
+    {
+        tracks_[i]->calculate_extremes();
+    }
+}
+
+NeutrinoTrack * NeutrinoEvent::last() const
 {
     if (!tracks_.isEmpty())
         return tracks_.last();
@@ -33,7 +40,26 @@ NeutrinoTrack * NeutrinoEvent::last()
     return nullptr;
 }
 
-QJsonObject NeutrinoEvent::to_json()
+QList<NeutrinoTrack *> NeutrinoEvent::get_tracks() const
+{
+    return tracks_;
+}
+
+float NeutrinoEvent::get_max_charge() const
+{
+    float max_charge = 0;
+
+    for (int i=0; i < tracks_.size(); ++i)
+    {
+        float max_track_charge = tracks_[i]->get_max_charge();
+        if (max_track_charge > max_charge)
+            max_charge = max_track_charge;
+    }
+
+    return max_charge;
+}
+
+QJsonObject NeutrinoEvent::to_json() const
 {
     QJsonObject object;
     object.insert("Id", QJsonValue::fromVariant(this->id_));
@@ -45,11 +71,13 @@ QJsonObject NeutrinoEvent::to_json()
     }
 
     object.insert("Tracks", tracks);
+    object.insert("TotalCharge", 0);
+    object.insert("EventDensity", 0);
 
     return object;
 }
 
-void NeutrinoEvent::print()
+void NeutrinoEvent::print() const
 {
     if (tracks_.isEmpty()) return;
 
@@ -58,22 +86,4 @@ void NeutrinoEvent::print()
     {
         tracks_[i]->print();
     }
-}
-
-QList<NeutrinoTrack *> NeutrinoEvent::get_tracks() const
-{
-    return tracks_;
-}
-
-float NeutrinoEvent::get_max_charge()
-{
-    float max_charge = 0;
-    for (int i=0; i < tracks_.size(); ++i)
-    {
-        float max_track_charge = tracks_[i]->get_max_charge();
-        if (max_track_charge > max_charge)
-            max_charge = max_track_charge;
-    }
-
-    return max_charge;
 }

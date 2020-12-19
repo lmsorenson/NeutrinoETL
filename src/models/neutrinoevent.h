@@ -11,13 +11,14 @@ public:
     virtual ~NeutrinoEvent();
 
     void add_track(NeutrinoTrack *track);
-    NeutrinoTrack * last();
-    QJsonObject to_json();
-    void print();
+    void calculate_extremes();
 
+    NeutrinoTrack * last() const;
     QList<NeutrinoTrack *> get_tracks() const;
-    float get_max_charge();
+    float get_max_charge() const;
 
+    QJsonObject to_json() const;
+    void print() const;
 private:
     int id_;
     QList<NeutrinoTrack *> tracks_;

@@ -14,14 +14,17 @@ public:
     NeutrinoTrack(int id);
     virtual ~NeutrinoTrack();
 
-    QJsonObject to_json();
+    QJsonObject to_json() const;
     void add_point(NeutrinoPoint *point);
 
-    QList<NeutrinoPoint*> get_points();
-    float get_max_charge();
-    void print();
+    QList<NeutrinoPoint*> get_points() const;
+    double get_max_charge() const;
+    void calculate_extremes();
+
+    void print() const;
 
 private:
     int id_;
     QList<NeutrinoPoint*> points_;
+    QPair<NeutrinoPoint*, NeutrinoPoint*> x_axis_extremes_, y_axis_extremes_, z_axis_extremes_;
 };

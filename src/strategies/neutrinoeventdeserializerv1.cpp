@@ -44,7 +44,11 @@ QList<NeutrinoEvent *> NeutrinoEventDeserializerV1::deserialize(QString content)
     }
 
     for (int i=0; i < event_list.size(); ++i)
+    {
+        event_list[i]->calculate_extremes();
         event_list[i]->print();
+    }
+
 
     return event_list;
 }
