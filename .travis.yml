@@ -31,6 +31,9 @@ jobs:
             - qt
           update: true
     - stage: build
+      os:
+        - osx
+        - linux
       script:
         - |
           ls
