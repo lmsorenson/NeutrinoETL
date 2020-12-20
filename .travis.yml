@@ -10,7 +10,7 @@ addons:
     packages:
       - libglfw2
       - libglfw-dev
-      - gt5-default
+      - qt5-default
     update: true
 env:
   global:
