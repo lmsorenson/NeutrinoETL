@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(PointTests LANGUAGES CXX)
-
+project(ModelTests LANGUAGES CXX)
 
 find_package(Qt5 COMPONENTS Widgets Test REQUIRED)
 
@@ -21,14 +20,13 @@ file(GLOB PROJECT_MOD_FILES
         ${CMAKE_SOURCE_DIR}/src/models/neutrinotrack.cpp
         ${CMAKE_SOURCE_DIR}/src/models/neutrinotrack.h
         ${CMAKE_SOURCE_DIR}/src/models/neutrinopoint.cpp
-        ${CMAKE_SOURCE_DIR}/src/models/neutrinopoint.h
-        )
+        ${CMAKE_SOURCE_DIR}/src/models/neutrinopoint.h)
 
-add_executable(PointTests ${PROJECT_MOD_FILES} tst_pointtests.cpp )
+add_executable(ModelTests ${PROJECT_MOD_FILES} tst_pointtests.cpp )
 
 include_directories(${CMAKE_SOURCE_DIR}/src/)
 
-add_test(NAME PointTests COMMAND PointTests)
+add_test(NAME ModelTests COMMAND ModelTests)
 
-target_link_libraries(PointTests PRIVATE Qt5::Widgets Qt5::Test)
+target_link_libraries(ModelTests PRIVATE Qt5::Widgets Qt5::Test)
 
