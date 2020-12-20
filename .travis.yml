@@ -26,6 +26,8 @@ jobs:
           cmake \
           -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 \
           ..
+        - ls
+        - ls test
         - ./test/ModelsUnitTests/ModelTests
     - os: linux
       dist: xenial
