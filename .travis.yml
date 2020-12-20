@@ -8,8 +8,9 @@ addons:
     update: true
   apt:
     packages:
-      - glfw
-      - qt
+      - libglfw3
+      - libglfw3-default
+      - qt5-default
     update: true
 env:
   global:
@@ -22,10 +23,10 @@ jobs:
         - mkdir build
         - cd build
         - |
-          ls
           cmake \
           -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 \
           ..
+          ls
     - os: linux
       dist: trusty
       script:

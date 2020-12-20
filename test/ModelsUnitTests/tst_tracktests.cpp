@@ -1,5 +1,4 @@
 #include <QtTest>
-#include <models/neutrinopoint.h>
 
 #include <models/neutrinotrack.h>
 
