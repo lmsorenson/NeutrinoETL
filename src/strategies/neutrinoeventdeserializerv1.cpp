@@ -4,7 +4,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
-#include <src/models/neutrinoevent.h>
+#include <models/neutrinoevent.h>
 
 NeutrinoEventDeserializerV1::NeutrinoEventDeserializerV1(QObject *parent) : Deserializer(parent)
 {

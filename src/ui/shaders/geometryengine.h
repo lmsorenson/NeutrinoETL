@@ -4,7 +4,7 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
 #include <QList>
-#include <src/ui/geometry/mesh.h>
+#include <ui/geometry/mesh.h>
 
 class GeometryEngine : public QOpenGLFunctions
 {

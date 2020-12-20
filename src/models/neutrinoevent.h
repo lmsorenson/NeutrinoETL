@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QObject>
-#include <src/models/neutrinotrack.h>
+#include <models/neutrinotrack.h>
 
 class NeutrinoEvent : public QObject
 {

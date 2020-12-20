@@ -1,4 +1,4 @@
-#include <src/ui/mainwindow.h>
+#include <ui/mainwindow.h>
 
 #include <QApplication>
 #include <QDebug>
@@ -9,8 +9,8 @@
 #include <QJsonDocument>
 #include <QSurfaceFormat>
 
-#include <src/strategies/neutrinoeventdeserializerv1.h>
-#include <src/ui/shaders/openglviewport.h>
+#include <strategies/neutrinoeventdeserializerv1.h>
+#include <ui/shaders/openglviewport.h>
 
 int main(int argc, char *argv[])
 {

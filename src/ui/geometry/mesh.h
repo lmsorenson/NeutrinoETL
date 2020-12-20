@@ -5,7 +5,7 @@
 #include <QVector3D>
 #include <QOpenGLBuffer>
 #include <QMatrix4x4>
-#include <src/ui/geometry/vertex.h>
+#include <ui/geometry/vertex.h>
 
 class Mesh : public QObject
 {

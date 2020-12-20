@@ -1,7 +1,7 @@
 #include "geometryengine.h"
 
-#include <src/ui/geometry/vertex.h>
-#include <src/ui/geometry/mesh.h>
+#include <ui/geometry/vertex.h>
+#include <ui/geometry/mesh.h>
 
 
 GeometryEngine::GeometryEngine()

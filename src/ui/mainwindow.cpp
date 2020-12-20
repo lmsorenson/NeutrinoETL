@@ -1,9 +1,9 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
-#include <src/ui/shaders/openglviewport.h>
-#include <src/ui/geometry/cube.h>
-#include <src/models/neutrinopoint.h>
+#include <ui/shaders/openglviewport.h>
+#include <ui/geometry/cube.h>
+#include <models/neutrinopoint.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

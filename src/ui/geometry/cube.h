@@ -3,8 +3,8 @@
 #include <QObject>
 #include <GLFW/glfw3.h>
 #include <QVector3D>
-#include <src/ui/geometry/vertex.h>
-#include <src/ui/geometry/mesh.h>
+#include <ui/geometry/vertex.h>
+#include <ui/geometry/mesh.h>
 
 class Cube : public Mesh
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include <QObject>
-#include <src/models/neutrinotrack.h>
-#include <src/models/neutrinoevent.h>
+#include <models/neutrinotrack.h>
+#include <models/neutrinoevent.h>
 
 class Deserializer : public QObject
 {

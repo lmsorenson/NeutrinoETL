@@ -3,7 +3,7 @@
 #include <QObject>
 #include <QList>
 #include <QVector3D>
-#include <src/models/neutrinopoint.h>
+#include <models/neutrinopoint.h>
 
 
 class NeutrinoTrack : public QObject
