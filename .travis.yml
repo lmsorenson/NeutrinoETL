@@ -6,7 +6,7 @@ env:
     - DEPLOY_VERSION=$(<version.txt)
 jobs:
   include:
-    - stage: build
+    - stage: linux setup
       os: linux
       dist: ubuntu
       script:
@@ -17,7 +17,7 @@ jobs:
           packages:
             - glfw
             - qt
-    - stage: build
+    - stage: osx setup
       os: osx
       osx_image: xcode12.2
       script:
@@ -30,10 +30,13 @@ jobs:
             - glfw
             - qt
           update: true
+    - stage: build
+      script:
+        - |
+          ls
+          cmake \
+          -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 \
+          ..
 script:
-  - |
-    ls
-    cmake \
-    -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 \
-    ..
+
   - ./test/ModelsUnitTests/ModelTests
