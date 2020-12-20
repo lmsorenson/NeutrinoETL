@@ -30,13 +30,12 @@ jobs:
     - os: linux
       dist: trusty
       script:
+        - apt-get update && apt-get install -y apt-transport-https
         - mkdir build
         - cd build
-        - stage: build
-          script:
-            - |
-              ls
-              cmake \
-              ..
+        - |
+          ls
+          cmake \
+          ..
 script:
   - ./test/ModelsUnitTests/ModelTests
