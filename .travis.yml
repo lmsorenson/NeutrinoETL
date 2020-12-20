@@ -1,9 +1,7 @@
 language: cpp
 os:
   - osx
-    osx_image: xcode12.2
   - linux
-    dist: trusty
 addons:
   homebrew:
     packages:
@@ -20,6 +18,10 @@ env:
     - DEPLOY_VERSION=$(<version.txt)
 jobs:
   include:
+    - os: linux
+      dist: trusty
+    - os: osx
+      osx_image: xcode12.2
     - stage: setup
       script:
         - mkdir build
