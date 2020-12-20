@@ -28,7 +28,7 @@ jobs:
           ..
           ls
     - os: linux
-      dist: trusty
+      dist: xenial
       script:
         - apt-cache search glfw
         - mkdir build
