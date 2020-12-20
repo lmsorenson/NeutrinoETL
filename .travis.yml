@@ -8,6 +8,9 @@ addons:
     update: true
   apt:
     packages:
+      - libglfw2
+      - libglfw-dev
+      - gt5-default
     update: true
 env:
   global:
