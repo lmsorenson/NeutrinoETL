@@ -28,6 +28,7 @@ jobs:
           ..
         - ls
         - ls test
+        - ls test/ModelsUnitTests
         - ./test/ModelsUnitTests/ModelTests
     - os: linux
       dist: xenial
