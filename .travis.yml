@@ -9,12 +9,7 @@ jobs:
     - os:
         - osx
           osx_image: xcode12.2
-          addons:
-            homebrew:
-              packages:
-                - glfw
-                - qt
-              update: true
+
 #        - linux
 #          dist: ubuntu
     - stage: upgrade
@@ -30,3 +25,10 @@ jobs:
           ..
     - stage: run model tests
       script:
+        - ./test/ModelsUnitTests/ModelTests
+addons:
+  homebrew:
+    packages:
+      - glfw
+      - qt
+    update: true
