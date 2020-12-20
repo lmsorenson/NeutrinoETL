@@ -8,11 +8,10 @@ jobs:
   include:
     - os: linux
       dist: ubuntu
-      stages:
-        - build
-        script:
-          - mkdir build
-          - cd build
+        - stage: build
+          script:
+            - mkdir build
+            - cd build
       addons:
         apt:
           packages:
@@ -20,9 +19,7 @@ jobs:
             - qt
     - os: osx
       osx_image: xcode12.2
-      stages:
-        - build
-        script:
+        - stage: build
           - brew upgrade qt
           - mkdir build
           - cd build
