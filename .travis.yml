@@ -8,10 +8,6 @@ addons:
     update: true
   apt:
     packages:
-      - apt-transport-https
-      - libglfw
-      - libglfw-dev
-      - qt5-default
     update: true
 env:
   global:
@@ -31,6 +27,7 @@ jobs:
     - os: linux
       dist: trusty
       script:
+        - apt-cache search glfw
         - mkdir build
         - cd build
         - |
