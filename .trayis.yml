@@ -20,7 +20,7 @@ before_script:
 script:
   - |
     cmake \
-    -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5
+    -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 \
     ..
   - ls
 #  - echo "${DEPLOY_VERSION}"
