@@ -10,6 +10,7 @@ jobs:
       dist: ubuntu
       stages:
         - build
+          script:
             - mkdir build
             - cd build
       addons:
@@ -21,6 +22,7 @@ jobs:
       osx_image: xcode12.2
       stages:
         - build
+          script:
             - brew upgrade qt
             - mkdir build
             - cd build
