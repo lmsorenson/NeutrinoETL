@@ -8,6 +8,11 @@ jobs:
   include:
     - os: linux
       dist: ubuntu
+      addons:
+        apt:
+          packages:
+            - glfw
+            - qt
     - os: osx
       osx_image: xcode12.2
       addons:
