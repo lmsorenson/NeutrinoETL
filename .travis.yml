@@ -6,7 +6,7 @@ env:
     - DEPLOY_VERSION=$(<version.txt)
 jobs:
   include:
-    - os:s
+    - os:
       - osx
         osx_image: xcode12.2
 addons:
