@@ -18,10 +18,21 @@ env:
     - DEPLOY_VERSION=$(<version.txt)
 jobs:
   include:
-    - os: linux
-      dist: trusty
     - os: osx
       osx_image: xcode12.2
+    - stage: setup
+      script:
+        - mkdir build
+        - cd build
+    - stage: build
+      script:
+        - |
+          ls
+          cmake \
+          -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 \
+          ..
+    - os: linux
+      dist: trusty
     - stage: setup
       script:
         - mkdir build
