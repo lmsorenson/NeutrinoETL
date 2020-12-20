@@ -1,7 +1,5 @@
 language: cpp
-os:
-  - osx
-  - linux
+os: osx
 addons:
   homebrew:
     packages:
@@ -32,7 +30,7 @@ jobs:
           -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 \
           ..
     - os: linux
-      dist: trusty
+      dist: ubuntu
     - stage: setup
       script:
         - mkdir build
