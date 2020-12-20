@@ -8,7 +8,7 @@ addons:
     update: true
   apt:
     packages:
-      - libglfw2
+      - libglfw3
       - libglfw-dev
       - qt5-default
     update: true
