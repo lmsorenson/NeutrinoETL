@@ -9,8 +9,8 @@ addons:
   apt:
     packages:
       - apt-transport-https
-      - libglfw3
-      - libglfw3-dev
+      - libglfw
+      - libglfw-dev
       - qt5-default
     update: true
 env:
