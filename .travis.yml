@@ -10,12 +10,12 @@ jobs:
       dist: ubuntu
     - os: osx
       osx_image: xcode12.2
-addons:
-  homebrew:
-    packages:
-      - glfw
-      - qt
-    update: true
+      addons:
+        homebrew:
+          packages:
+            - glfw
+            - qt
+          update: true
 before_script:
   - brew upgrade qt
   - mkdir build
