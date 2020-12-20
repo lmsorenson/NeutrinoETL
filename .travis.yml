@@ -9,9 +9,6 @@ jobs:
     - os:
         - osx
           osx_image: xcode12.2
-
-#        - linux
-#          dist: ubuntu
     - stage: upgrade
       script:
         - brew upgrade qt
