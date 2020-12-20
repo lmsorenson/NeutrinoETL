@@ -4,17 +4,17 @@ osx_image: xcode12.2
 env:
   global:
     - DEPLOY_VERSION=$(<version.txt)
-addons:
-  homebrew:
-    packages:
-      - glfw
-      - qt
-    update: true
 jobs:
   include:
     - os:
         - osx
           osx_image: xcode12.2
+          addons:
+            homebrew:
+              packages:
+                - glfw
+                - qt
+              update: true
         - linux
           dist: ubuntu
     - stage: upgrade
@@ -30,4 +30,3 @@ jobs:
           ..
     - stage: run model tests
       script:
-        - ./test/ModelsUnitTests/ModelTests
