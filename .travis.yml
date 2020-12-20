@@ -9,7 +9,7 @@ addons:
   apt:
     packages:
       - libglfw3
-      - libglfw3-default
+      - libglfw3-dev
       - qt5-default
     update: true
 env:
