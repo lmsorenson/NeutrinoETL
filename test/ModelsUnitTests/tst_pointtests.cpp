@@ -1,21 +1,6 @@
-#include <QtTest>
+#include "tst_pointtests.h"
+
 #include <models/neutrinopoint.h>
-
-
-class PointTests : public QObject
-{
-    Q_OBJECT
-
-public:
-    PointTests();
-    ~PointTests();
-
-private slots:
-    void constructor_with_valid_arguments_populates_members();
-    void constructor_with_null_arguments_populates_members_as_default();
-    void to_json_populates_fields();
-
-};
 
 PointTests::PointTests()
 {
@@ -84,7 +69,5 @@ void PointTests::to_json_populates_fields()
 
     delete point;
 }
-
-QTEST_APPLESS_MAIN(PointTests)
 
 #include "tst_pointtests.moc"

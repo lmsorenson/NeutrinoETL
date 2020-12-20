@@ -22,7 +22,13 @@ file(GLOB PROJECT_MOD_FILES
         ${CMAKE_SOURCE_DIR}/src/models/neutrinopoint.cpp
         ${CMAKE_SOURCE_DIR}/src/models/neutrinopoint.h)
 
-add_executable(ModelTests ${PROJECT_MOD_FILES} tst_pointtests.cpp )
+add_executable(ModelTests
+        ${PROJECT_MOD_FILES}
+        main.cpp
+        tst_tracktests.cpp
+        tst_tracktests.h
+        tst_pointtests.cpp
+        tst_pointtests.h)
 
 include_directories(${CMAKE_SOURCE_DIR}/src/)
 

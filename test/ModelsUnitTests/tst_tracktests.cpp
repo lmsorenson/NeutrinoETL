@@ -1,39 +1,63 @@
-#include <QtTest>
+#pragma once
 
+#include "tst_tracktests.h"
 #include <models/neutrinotrack.h>
 
-class PointTests : public QObject
-{
-    Q_OBJECT
-
-public:
-    PointTests();
-    ~PointTests();
-
-private slots:
-    void test();
-    void test2();
-
-};
-
-PointTests::PointTests()
+TrackTests::TrackTests()
 {
 
 }
 
-PointTests::~PointTests()
+TrackTests::~TrackTests()
 {
 
 }
 
-void PointTests::constructor_with_valid_arguments_populates_members()
+void TrackTests::test_add_point_to_track()
 {
+    QMap<QString, double> point_map;
+
+    NeutrinoTrack* track = new NeutrinoTrack(2);
+    track->add_point(new NeutrinoPoint(point_map));
+
+    QCOMPARE(track->id(), 2);
+    QCOMPARE(track->get_points().size(), 1);
+
+    delete track;
 }
 
-void PointTests::constructor_with_null_arguments_populates_members_as_default()
+void TrackTests::test_get_max_charge_greater_than_zero()
 {
+    QMap<QString, double> point_map;
+    point_map.insert("charge", 500.203);
+
+    QMap<QString, double> point_map_2;
+    point_map.insert("charge", 450);
+
+    NeutrinoTrack* track = new NeutrinoTrack(2);
+    track->add_point(new NeutrinoPoint(point_map));
+    track->add_point(new NeutrinoPoint(point_map_2));
+
+    QCOMPARE(track->get_max_charge(), 500.203);
+
+    delete track;
 }
 
-QTEST_APPLESS_MAIN(PointTests)
+void TrackTests::test_get_total_charge()
+{
+    QMap<QString, double> point_map;
+    point_map.insert("charge", 500.2);
 
-#include "tst_pointtests.moc"
+    QMap<QString, double> point_map_2;
+    point_map.insert("charge", 450.3);
+
+    NeutrinoTrack* track = new NeutrinoTrack(2);
+    track->add_point(new NeutrinoPoint(point_map));
+    track->add_point(new NeutrinoPoint(point_map_2));
+
+    QCOMPARE(track->total_charge(), 950.5);
+
+    delete track;
+}
+
+#include "tst_tracktests.moc"

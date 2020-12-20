@@ -13,7 +13,6 @@ public:
     NeutrinoTrack(int id);
     virtual ~NeutrinoTrack();
 
-    QJsonObject to_json() const;
     void add_point(NeutrinoPoint *point);
 
     QList<NeutrinoPoint*> get_points() const;
@@ -22,9 +21,12 @@ public:
     double track_density() const;
     void calculate_extremes();
 
+    int32_t id() const;
+
+    QJsonObject to_json() const;
     void print() const;
 private:
-    int id_;
+    int32_t id_;
     QList<NeutrinoPoint*> points_;
     QPair<NeutrinoPoint*, NeutrinoPoint*> x_axis_extremes_, y_axis_extremes_, z_axis_extremes_;
 };

@@ -114,6 +114,8 @@ void NeutrinoTrack::calculate_extremes()
     z_axis_extremes_ = z;
 }
 
+int32_t NeutrinoTrack::id() const { return id_; }
+
 QJsonObject NeutrinoTrack::to_json() const
 {
     QJsonObject object;
