@@ -8,6 +8,7 @@ addons:
     update: true
   apt:
     packages:
+      - apt-transport-https
       - libglfw3
       - libglfw3-dev
       - qt5-default
@@ -30,7 +31,6 @@ jobs:
     - os: linux
       dist: trusty
       script:
-        - apt-get update && apt-get install -y apt-transport-https
         - mkdir build
         - cd build
         - |
