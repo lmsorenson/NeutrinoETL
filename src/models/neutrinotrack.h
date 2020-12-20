@@ -5,7 +5,6 @@
 #include <QVector3D>
 #include <models/neutrinopoint.h>
 
-
 class NeutrinoTrack : public QObject
 {
     Q_OBJECT
@@ -24,7 +23,6 @@ public:
     void calculate_extremes();
 
     void print() const;
-
 private:
     int id_;
     QList<NeutrinoPoint*> points_;

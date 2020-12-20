@@ -8,6 +8,9 @@ jobs:
   include:
     - os: linux
       dist: ubuntu
+        - stage: build
+          - mkdir build
+          - cd build
       addons:
         apt:
           packages:
@@ -15,16 +18,16 @@ jobs:
             - qt
     - os: osx
       osx_image: xcode12.2
+        - stage: build
+          - brew upgrade qt
+          - mkdir build
+          - cd build
       addons:
         homebrew:
           packages:
             - glfw
             - qt
           update: true
-before_script:
-  - brew upgrade qt
-  - mkdir build
-  - cd build
 script:
   - |
     cmake \
