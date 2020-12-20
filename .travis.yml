@@ -6,9 +6,9 @@ env:
     - DEPLOY_VERSION=$(<version.txt)
 jobs:
   include:
-    - os:
-        - osx
-          osx_image: xcode12.2
+    - os:s
+      - osx
+        osx_image: xcode12.2
 addons:
   homebrew:
     packages:
