@@ -15,8 +15,8 @@ jobs:
                 - glfw
                 - qt
               update: true
-        - linux
-          dist: ubuntu
+#        - linux
+#          dist: ubuntu
     - stage: upgrade
       script:
         - brew upgrade qt
