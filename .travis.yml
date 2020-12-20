@@ -1,39 +1,30 @@
 language: cpp
-os: osx
-osx_image: xcode12.2
+os:
+  - osx
+    osx_image: xcode12.2
+  - linux
+    dist: ubuntu
+addons:
+  homebrew:
+    packages:
+      - glfw
+      - qt
+    update: true
+  apt:
+    packages:
+      - glfw
+      - qt
+    update: true
 env:
   global:
     - DEPLOY_VERSION=$(<version.txt)
 jobs:
   include:
     - stage: setup
-      os: linux
-      dist: ubuntu
       script:
         - mkdir build
         - cd build
-      addons:
-        apt:
-          packages:
-            - glfw
-            - qt
-    - stage: setup
-      os: osx
-      osx_image: xcode12.2
-      script:
-        - brew upgrade qt
-        - mkdir build
-        - cd build
-      addons:
-        homebrew:
-          packages:
-            - glfw
-            - qt
-          update: true
     - stage: build
-      os:
-        - osx
-        - linux
       script:
         - |
           ls
@@ -41,5 +32,4 @@ jobs:
           -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 \
           ..
 script:
-
   - ./test/ModelsUnitTests/ModelTests
