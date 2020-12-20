@@ -17,64 +17,40 @@ find_package(Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
 
 set(TS_FILES NeutrinoETL_en_US.ts)
 
+file(GLOB PROJECT_MOD_FILES
+        main.cpp
+        ui/mainwindow.cpp
+        ui/mainwindow.h
+        ui/mainwindow.ui
+        ui/shaders/openglviewport.cpp
+        ui/shaders/openglviewport.h
+        ui/shaders/geometryengine.cpp
+        ui/shaders/geometryengine.h
+        ui/shaders/vertex.vsh
+        ui/shaders/fragment.fsh
+        ui/geometry/vertex.cpp
+        ui/geometry/vertex.h
+        ui/geometry/mesh.cpp
+        ui/geometry/mesh.h
+        ui/geometry/cube.cpp
+        ui/geometry/cube.h
+        models/neutrinoevent.cpp
+        models/neutrinoevent.h
+        models/neutrinotrack.cpp
+        models/neutrinotrack.h
+        models/neutrinopoint.cpp
+        models/neutrinopoint.h
+        strategies/deserialize.cpp
+        strategies/deserialize.h
+        strategies/neutrinoeventdeserializerv1.cpp
+        strategies/neutrinoeventdeserializerv1.h
+        ${TS_FILES}
+        )
+
 if(ANDROID)
-  add_library(NeutrinoETL SHARED
-    main.cpp
-    ui/mainwindow.cpp
-    ui/mainwindow.h
-    ui/mainwindow.ui
-    ui/shaders/openglviewport.cpp
-    ui/shaders/openglviewport.h
-    ui/shaders/geometryengine.cpp
-    ui/shaders/geometryengine.h
-    ui/shaders/vertex.vsh
-    ui/shaders/fragment.fsh
-    ui/geometry/vertex.cpp
-    ui/geometry/vertex.h
-    ui/geometry/mesh.cpp
-    ui/geometry/mesh.h
-    ui/geometry/cube.cpp
-    ui/geometry/cube.h
-    models/neutrinotrack.cpp
-    models/neutrinotrack.h
-    models/neutrinopoint.cpp
-    models/neutrinopoint.h
-    strategies/deserialize.cpp
-    strategies/deserialize.h
-    strategies/neutrinoeventdeserializerv1.cpp
-    strategies/neutrinoeventdeserializerv1.h
-    ${TS_FILES}
-  )
+  add_library(NeutrinoETL SHARED ${PROJECT_MOD_FILES})
 else()
-  add_executable(NeutrinoETL
-    main.cpp
-    ui/mainwindow.cpp
-    ui/mainwindow.h
-    ui/mainwindow.ui
-    ui/shaders/openglviewport.cpp
-    ui/shaders/openglviewport.h
-    ui/shaders/geometryengine.cpp
-    ui/shaders/geometryengine.h
-    ui/shaders/vertex.vsh
-    ui/shaders/fragment.fsh
-    ui/geometry/vertex.cpp
-    ui/geometry/vertex.h
-    ui/geometry/mesh.cpp
-    ui/geometry/mesh.h
-    ui/geometry/cube.cpp
-    ui/geometry/cube.h
-    models/neutrinoevent.cpp
-    models/neutrinoevent.h
-    models/neutrinotrack.cpp
-    models/neutrinotrack.h
-    models/neutrinopoint.cpp
-    models/neutrinopoint.h
-    strategies/deserialize.cpp
-    strategies/deserialize.h
-    strategies/neutrinoeventdeserializerv1.cpp
-    strategies/neutrinoeventdeserializerv1.h
-    ${TS_FILES}
-  )
+  add_executable(NeutrinoETL ${PROJECT_MOD_FILES})
 endif()
 
 target_link_libraries(NeutrinoETL PRIVATE Qt5::Widgets Qt5::Gui glfw OpenGL::GL)
