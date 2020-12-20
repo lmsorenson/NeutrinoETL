@@ -18,28 +18,30 @@ jobs:
   include:
     - os: osx
       osx_image: xcode12.2
-      - stage: setup
-        script:
-          - mkdir build
-          - cd build
-      - stage: build
-        script:
-          - |
-            ls
-            cmake \
-            -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 \
-            ..
+      stages:
+        - stage: setup
+          script:
+            - mkdir build
+            - cd build
+        - stage: build
+          script:
+            - |
+              ls
+              cmake \
+              -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 \
+              ..
     - os: linux
       dist: trusty
-      - stage: setup
-        script:
-          - mkdir build
-          - cd build
-      - stage: build
-        script:
-          - |
-            ls
-            cmake \
-            ..
+      stages:
+        - stage: setup
+          script:
+            - mkdir build
+            - cd build
+        - stage: build
+          script:
+            - |
+              ls
+              cmake \
+              ..
 script:
   - ./test/ModelsUnitTests/ModelTests
