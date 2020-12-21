@@ -31,7 +31,7 @@ jobs:
     - os: linux
       dist: xenial
       script:
-        - apt-get qt5-default
+        - apt-get source qt5-default
         - mkdir build
         - cd build
         - |
