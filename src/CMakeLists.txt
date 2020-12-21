@@ -20,7 +20,8 @@ else()
 endif()
 
 find_package(OpenGL REQUIRED)
-find_package(Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS LinguistTools)
 
 set(TS_FILES NeutrinoETL_en_US.ts)
 
