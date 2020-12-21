@@ -12,8 +12,11 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(glfw3)
-if(NOT glfw3_FOUND)
+if(NOT ${glfw3_FOUND})
+  message("using submodule")
   add_subdirectory(../packages/glfw ${CMAKE_BINARY_DIR}/glfw)
+else()
+  message("using found pacckage")
 endif()
 
 find_package(OpenGL REQUIRED)
