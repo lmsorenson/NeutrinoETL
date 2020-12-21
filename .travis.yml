@@ -33,13 +33,12 @@ jobs:
     - os: linux
       dist: xenial
       script:
-        - pwd
-        - ls /usr/bin
-        - ls /usr/lib/cmake/
         - sudo apt upgrade cmake
         - mkdir build
         - cd build
+        - echo $PREFIX_PATH
         - |
           cmake \
+          -DCMAKE_PREFIX_PATH=$PREFIX_PATH \
           ..
           make
