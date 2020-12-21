@@ -12,6 +12,7 @@ addons:
       - libxrandr2
       - libxrandr-dev
       - libxinerama-dev
+      - libxcursor-dev
       - libglfw3
       - qt5-default
     update: true
