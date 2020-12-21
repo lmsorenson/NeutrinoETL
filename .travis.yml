@@ -31,10 +31,10 @@ jobs:
     - os: linux
       dist: xenial
       script:
-        - dpkg -L qt5-default
+        - find / -type f -name "glfw3Config.cmake"
         - mkdir build
         - cd build
         - |
-          ls
           cmake \
           ..
+          make
