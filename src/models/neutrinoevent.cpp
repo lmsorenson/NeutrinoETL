@@ -2,6 +2,7 @@
 
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QDebug>
 
 NeutrinoEvent::NeutrinoEvent(int id, QObject *parent)
     : QObject(parent)
