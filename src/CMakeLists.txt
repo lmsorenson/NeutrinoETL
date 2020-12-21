@@ -12,9 +12,9 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(glfw3)
-# IF (NOT glfw3_FOUND)
+if(NOT glfw3_FOUND)
   add_subdirectory(../packages/glfw ${CMAKE_BINARY_DIR}/glfw)
-# ENDIF()
+endif()
 
 find_package(OpenGL REQUIRED)
 find_package(Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
