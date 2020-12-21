@@ -63,4 +63,6 @@ endif()
 
 target_link_libraries(NeutrinoETL PRIVATE Qt5::Widgets Qt5::Gui glfw OpenGL::GL)
 
+if(${Qt5LinguistTools_FOUND})
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+endif()
