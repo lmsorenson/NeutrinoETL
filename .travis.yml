@@ -34,7 +34,7 @@ jobs:
       dist: xenial
       script:
         - pwd
-        - ls
+        - ls /usr/bin
         - sudo apt upgrade cmake
         - mkdir build
         - cd build
