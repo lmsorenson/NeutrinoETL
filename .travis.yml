@@ -10,7 +10,6 @@ addons:
     packages:
       - cmake
       - libglfw3
-      - libglfw-dev
       - qt5-default
     update: true
 env:
