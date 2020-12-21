@@ -8,6 +8,7 @@ addons:
     update: true
   apt:
     packages:
+      - cmake
       - libglfw3
       - libglfw-dev
       - qt5-default
@@ -32,8 +33,7 @@ jobs:
         - ./test/ModelsUnitTests/ModelTests
     - os: linux
       dist: xenial
-      script:
-        - sudo apt upgrade cmake
+      script:s
         - mkdir build
         - cd build
         - PREFIX_PATH=`llvm-config-$VERSION --prefix`
