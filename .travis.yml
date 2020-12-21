@@ -31,7 +31,7 @@ jobs:
     - os: linux
       dist: xenial
       script:
-        - apt-cache search glfw
+        - dpkg -L qt5-default
         - mkdir build
         - cd build
         - |
