@@ -26,7 +26,7 @@ NeutrinoTrack::~NeutrinoTrack()
 
 void NeutrinoTrack::add_point(NeutrinoPoint *point)
 {
-    points_.append(point);
+    points_ << point;
 }
 
 QList<NeutrinoPoint*> NeutrinoTrack::get_points() const
@@ -40,7 +40,7 @@ double NeutrinoTrack::get_max_charge() const
 
     for (int i=0; i < points_.size(); ++i)
     {
-        float point_charge = points_[i]->charge();
+        double point_charge = points_[i]->charge();
         if (point_charge > max_charge)
             max_charge = point_charge;
     }
@@ -52,8 +52,8 @@ double NeutrinoTrack::total_charge() const
 {
     double total_charge = 0;
 
-    for (int i=0; i < points_.size(); ++i)
-        total_charge += points_[i]->charge();
+    for(auto point : points_)
+        total_charge = total_charge + point->charge();
 
     return total_charge;
 }
