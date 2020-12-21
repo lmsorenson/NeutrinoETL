@@ -31,7 +31,8 @@ jobs:
     - os: linux
       dist: xenial
       script:
-        - ls /usr/local/
+        - ls /usr/local/cmake/
+        - ls /usr/local/lib/
         - mkdir build
         - cd build
         - |
