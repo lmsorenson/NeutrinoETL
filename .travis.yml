@@ -31,7 +31,6 @@ jobs:
     - os: linux
       dist: xenial
       script:
-        - find / -type f -name "glfw3Config.cmake"
         - mkdir build
         - cd build
         - |
