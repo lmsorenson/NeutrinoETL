@@ -31,12 +31,12 @@ jobs:
           ..
         - make
         - ./test/ModelsUnitTests/ModelTests
-#    - os: linux
-#      dist: xenial
-#      script:
-#        - mkdir build
-#        - cd build
-#        - |
-#          cmake \
-#          ..
-#          make
+    - os: linux
+      dist: focal
+      script:
+        - mkdir build
+        - cd build
+        - |
+          cmake \
+          ..
+          make
