@@ -11,6 +11,7 @@ addons:
       - cmake
       - libxrandr2
       - libxrandr-dev
+      - libxinerama-dev
       - libglfw3
       - qt5-default
     update: true
