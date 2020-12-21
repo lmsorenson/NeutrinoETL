@@ -20,6 +20,8 @@ jobs:
     - os: osx
       osx_image: xcode12.2
       script:
+        - pwd
+        - ls
         - mkdir build
         - cd build
         - |
@@ -31,6 +33,8 @@ jobs:
     - os: linux
       dist: xenial
       script:
+        - pwd
+        - ls
         - apt-get source qt5-default
         - mkdir build
         - cd build
