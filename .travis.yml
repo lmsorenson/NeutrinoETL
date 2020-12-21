@@ -31,7 +31,7 @@ jobs:
     - os: linux
       dist: xenial
       script:
-        - ls /usr/
+        - ls /usr/local/
         - mkdir build
         - cd build
         - |
