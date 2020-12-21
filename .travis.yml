@@ -31,7 +31,7 @@ jobs:
     - os: linux
       dist: xenial
       script:
-        - ls /usr/local/cmake/bin
+        - apt-get qt5-default
         - mkdir build
         - cd build
         - |
