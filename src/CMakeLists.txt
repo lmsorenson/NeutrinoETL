@@ -11,8 +11,11 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(libglfw3)
 find_package(glfw3)
+# IF (!glfw3_FOUND)
+  add_subdirectory(../packages/glfw ${CMAKE_BINARY_DIR}/glfw)
+# ENDIF()
+
 find_package(OpenGL REQUIRED)
 find_package(Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
 
