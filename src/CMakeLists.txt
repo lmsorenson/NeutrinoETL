@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(glfw3)
-# IF (!glfw3_FOUND)
+# IF (NOT glfw3_FOUND)
   add_subdirectory(../packages/glfw ${CMAKE_BINARY_DIR}/glfw)
 # ENDIF()
 
