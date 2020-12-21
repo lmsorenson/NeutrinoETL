@@ -35,7 +35,7 @@ jobs:
       script:
         - pwd
         - ls
-        - apt-get source qt5-default
+        - sudo apt upgrade cmake
         - mkdir build
         - cd build
         - |
