@@ -36,9 +36,7 @@ jobs:
       script:
         - mkdir build
         - cd build
-        - PREFIX_PATH=`llvm-config-$VERSION --prefix`
         - |
           cmake \
-          -DCMAKE_PREFIX_PATH=$PREFIX_PATH \
           ..
           make
