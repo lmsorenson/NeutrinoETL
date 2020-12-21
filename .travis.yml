@@ -10,6 +10,7 @@ addons:
     packages:
       - cmake
       - libxrandr2
+      - libxrandr-dev
       - libglfw3
       - qt5-default
     update: true
