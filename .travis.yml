@@ -33,7 +33,7 @@ jobs:
         - ./test/ModelsUnitTests/ModelTests
     - os: linux
       dist: xenial
-      script:s
+      script:
         - mkdir build
         - cd build
         - PREFIX_PATH=`llvm-config-$VERSION --prefix`
