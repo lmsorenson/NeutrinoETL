@@ -103,7 +103,7 @@ void TrackTests::to_json_populates_fields()
     point_map.insert("Point no", 0);
     point_map.insert("TX", 0);
     point_map.insert("TY", 0);
-    point_map.insert("TZ", 0);
+    point_map.insert("TZ", -10);
     point_map.insert("charge", 10);
 
     QMap<QString, double> point_map_2;
@@ -153,7 +153,7 @@ void TrackTests::to_json_populates_fields()
     QCOMPARE( metadata.value("ZAxisMaximum"), (double)1003);
     QCOMPARE( metadata.value("XAxisMinimum"), (double)0);
     QCOMPARE( metadata.value("YAxisMinimum"), (double)0);
-    QCOMPARE( metadata.value("ZAxisMinimum"), (double)0);
+    QCOMPARE( metadata.value("ZAxisMinimum"), (double)-10);
     QCOMPARE( metadata.value("TotalCharge"), (double)3474);
     QCOMPARE( points_json.isArray(), true);
     QCOMPARE( points_json.toArray().size(), 5);
