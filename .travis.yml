@@ -14,7 +14,6 @@ addons:
       - libxinerama-dev
       - libxcursor-dev
       - libxi-dev
-      - libglfw3
       - qt5-default
     update: true
 env:
