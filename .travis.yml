@@ -44,3 +44,24 @@ jobs:
           cmake \
           ..
           make
+        - ./test/ModelsUnitTests/ModelTests
+    - os: linux
+      dist: xenial
+      script:
+        - mkdir build
+        - cd build
+        - |
+          cmake \
+          ..
+          make
+        - ./test/ModelsUnitTests/ModelTests
+    - os: linux
+      dist: trusty
+      script:
+        - mkdir build
+        - cd build
+        - |
+          cmake \
+          ..
+          make
+        - ./test/ModelsUnitTests/ModelTests
