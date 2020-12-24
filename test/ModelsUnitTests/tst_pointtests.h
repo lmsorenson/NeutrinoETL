@@ -8,7 +8,7 @@ class PointTests : public QObject
 
 public:
     PointTests();
-    ~PointTests();
+    virtual ~PointTests();
 
 private slots:
     void constructor_with_valid_arguments_populates_members();

@@ -8,7 +8,7 @@ class EventTests : public QObject
 
 public:
     EventTests();
-    ~EventTests();
+    virtual ~EventTests();
 
 private slots:
     void test_last();

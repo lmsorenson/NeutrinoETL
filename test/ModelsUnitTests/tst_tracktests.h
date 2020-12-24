@@ -8,7 +8,7 @@ class TrackTests : public QObject
 
 public:
     TrackTests();
-    ~TrackTests();
+    virtual ~TrackTests();
 
 private slots:
     void test_add_point_to_track();

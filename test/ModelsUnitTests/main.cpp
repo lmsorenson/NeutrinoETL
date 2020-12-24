@@ -4,9 +4,9 @@
 
 int main(int argc, char *argv[])
 {
-    EventTests event_tests;
-    TrackTests track_tests;
     PointTests point_tests;
+    TrackTests track_tests;
+    EventTests event_tests;
 
     int point_test_result = QTest::qExec(&point_tests, argc, argv);
     int track_test_result = QTest::qExec(&track_tests, argc, argv);

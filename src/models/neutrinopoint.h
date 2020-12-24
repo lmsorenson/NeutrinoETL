@@ -3,12 +3,12 @@
 #include <QObject>
 #include <QMap>
 
-class NeutrinoPoint : QObject
+class NeutrinoPoint : public QObject
 {
     Q_OBJECT
 public:
     NeutrinoPoint(QMap<QString, double> point_map);
-    virtual ~NeutrinoPoint() = default;
+    virtual ~NeutrinoPoint();
 
     int32_t id() const;
     double x() const;

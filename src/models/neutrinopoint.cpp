@@ -13,6 +13,11 @@ NeutrinoPoint::NeutrinoPoint(QMap<QString, double> point_map)
     charge_ = point_map["charge"];
 }
 
+NeutrinoPoint::~NeutrinoPoint()
+{
+
+}
+
 int32_t NeutrinoPoint::id() const { return id_; }
 double NeutrinoPoint::x() const { return x_; }
 double NeutrinoPoint::y() const { return y_; }
