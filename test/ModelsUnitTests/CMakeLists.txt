@@ -25,6 +25,8 @@ file(GLOB PROJECT_MOD_FILES
 add_executable(ModelTests
         ${PROJECT_MOD_FILES}
         main.cpp
+        tst_eventtests.cpp
+        tst_eventtests.h
         tst_tracktests.cpp
         tst_tracktests.h
         tst_pointtests.cpp
