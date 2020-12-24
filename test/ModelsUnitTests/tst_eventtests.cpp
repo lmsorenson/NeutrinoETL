@@ -119,5 +119,35 @@ void EventTests::test_get_max_charge()
 
 void EventTests::test_to_json()
 {
-    QFAIL("fail");
+    QMap<QString, double> point_map;
+    point_map.insert("Point no", 01);
+    point_map.insert("TX", 0);
+    point_map.insert("TY", 0);
+    point_map.insert("TZ", 0);
+    point_map.insert("charge", 1212);
+
+    NeutrinoTrack* track1 = new NeutrinoTrack(2001);
+    track1->add_point(new NeutrinoPoint(point_map));
+
+    QMap<QString, double> point_map_2;
+    point_map_2.insert("Point no", 11);
+    point_map_2.insert("TX", 100);
+    point_map_2.insert("TY", 100);
+    point_map_2.insert("TZ", 100);
+    point_map_2.insert("charge", 400);
+
+    NeutrinoTrack* track2 = new NeutrinoTrack(2002);
+    track2->add_point(new NeutrinoPoint(point_map_2));
+
+    NeutrinoEvent *event = new NeutrinoEvent(3001);
+    event->add_track(track1);
+    event->add_track(track2);
+
+    auto json = event->to_json();
+
+    QCOMPARE(json.value("Id"), 3001);
+    QCOMPARE(json.value("Tracks").isArray(), true);
+    QCOMPARE(json.value("Tracks").toArray().size(), 2);
+
+    delete event;
 }
