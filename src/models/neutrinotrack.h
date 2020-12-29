@@ -16,6 +16,10 @@ public:
     void add_point(NeutrinoPoint *point);
 
     QList<NeutrinoPoint*> get_points() const;
+    QPair<NeutrinoPoint*, NeutrinoPoint*> x_extremes() const;
+    QPair<NeutrinoPoint*, NeutrinoPoint*> y_extremes() const;
+    QPair<NeutrinoPoint*, NeutrinoPoint*> z_extremes() const;
+
     double get_max_charge() const;
     double total_charge() const;
     double track_density() const;
@@ -25,6 +29,7 @@ public:
 
     QJsonObject to_json() const;
     void print() const;
+
 private:
     int32_t id_;
     QList<NeutrinoPoint*> points_;

@@ -34,6 +34,10 @@ QList<NeutrinoPoint*> NeutrinoTrack::get_points() const
     return points_;
 }
 
+QPair<NeutrinoPoint*, NeutrinoPoint*> NeutrinoTrack::x_extremes() const { return x_axis_extremes_; }
+QPair<NeutrinoPoint*, NeutrinoPoint*> NeutrinoTrack::y_extremes() const { return y_axis_extremes_; }
+QPair<NeutrinoPoint*, NeutrinoPoint*> NeutrinoTrack::z_extremes() const { return z_axis_extremes_; }
+
 double NeutrinoTrack::get_max_charge() const
 {
     double max_charge = 0;

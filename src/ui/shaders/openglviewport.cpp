@@ -50,7 +50,7 @@ void Viewport::initializeGL()
 {
     initializeOpenGLFunctions();
 
-    glClearColor(0,0,0,0);
+    glClearColor(.5,.5,.5,1);
 
     init_shaders();
     init_textures();
@@ -58,8 +58,7 @@ void Viewport::initializeGL()
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
 
-    if (!engine_)
-        engine_ = new GeometryEngine();
+    if (!engine_) engine_ = new GeometryEngine();
 
     timer_.start(12, this);
 }
@@ -82,10 +81,10 @@ void Viewport::paintGL()
     texture_->bind();
 
     QMatrix4x4 view;
-    view.translate(0.0, 0.0, -1 * camera_distance_);
+    view.translate(0.0f, 0.0f, -1 * camera_distance_);
     view.rotate(rotation_);
 
-    engine_->draw_geometry(&program_, projection_ * view);
+    if (engine_) engine_->draw_geometry(&program_, projection_ * view);
 }
 
 void Viewport::init_shaders()
@@ -130,12 +129,15 @@ void Viewport::init_textures()
 void Viewport::set_engine(GeometryEngine *engine)
 {
     if (engine)
+    {
+        delete engine_;
         engine_ = engine;
+    }
 }
 
 void Viewport::create_point(QVector3D position, float scale)
 {
-    engine_->add_geometry(new Cube(position, QVector3D(scale, scale, scale)));
+    if (engine_) engine_->add_geometry(new Cube(position, QVector3D(scale, scale, scale)));
 }
 
 void Viewport::mousePressEvent(QMouseEvent *e)

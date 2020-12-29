@@ -19,7 +19,9 @@ public:
 
     QJsonObject to_json() const;
     void print() const;
+
 private:
     int id_;
     QList<NeutrinoTrack *> tracks_;
+    QPair<NeutrinoPoint*, NeutrinoPoint*> x_axis_extremes_, y_axis_extremes_, z_axis_extremes_;
 };
