@@ -11,15 +11,18 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    front_viewport_ = new Viewport(Axis::X, 0);
+    right_viewport_ = new Viewport(Axis::Y, -90);
+    left_viewport_ = new Viewport(Axis::Y, 90);
+    perspective_viewport_ = new Viewport( {
+        AxisRotation(Axis::Y, 45),
+        AxisRotation(Axis::X, 30)
+    });
 
-
-    viewport_ = new Viewport();
-    side_viewport_ = new Viewport();
-
-
-
-    ui->gridLayout->addWidget(viewport_);
-    ui->gridLayout->addWidget(side_viewport_);
+    ui->gridLayout->addWidget(front_viewport_, 0,0);
+    ui->gridLayout->addWidget(right_viewport_, 0,1);
+    ui->gridLayout->addWidget(left_viewport_, 1,0);
+    ui->gridLayout->addWidget(perspective_viewport_, 1, 1);
 }
 
 void MainWindow::add_points(QList<NeutrinoPoint*> points)
@@ -28,17 +31,20 @@ void MainWindow::add_points(QList<NeutrinoPoint*> points)
 //    {
 //        viewport_->create_point(QVector3D(point->x(), point->y(), point->z()), point->charge() * .001);
 //    }
-    GeometryEngine *engine = new GeometryEngine();
+    engine_ = new GeometryEngine();
 
-    viewport_->set_engine(engine);
-    side_viewport_->set_engine(engine);
+    front_viewport_->set_engine(engine_);
+    right_viewport_->set_engine(engine_);
+    left_viewport_->set_engine(engine_);
+    perspective_viewport_->set_engine(engine_);
 
-    viewport_->create_point(QVector3D(0, 0, 0), 1);
+    front_viewport_->create_point(QVector3D(0, 0, 0), 1);
 }
 
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete engine_;
 }
 

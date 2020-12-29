@@ -19,5 +19,6 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    class Viewport *viewport_, *side_viewport_;
+    class Viewport *front_viewport_, *right_viewport_ ,*left_viewport_, *perspective_viewport_;
+    class GeometryEngine * engine_;
 };

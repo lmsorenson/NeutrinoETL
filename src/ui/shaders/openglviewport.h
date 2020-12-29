@@ -7,12 +7,35 @@
 #include <QBasicTimer>
 #include "geometryengine.h"
 
+enum Axis
+{
+    X,
+    Y,
+    Z
+};
+
+class AxisRotation
+{
+public:
+    AxisRotation(Axis rotation_axis, float rotation_angle);
+    ~AxisRotation() = default;
+
+    float angle() const;
+    Axis axis() const;
+
+private:
+    float angle_;
+    Axis axis_;
+};
+
 class Viewport : public QOpenGLWidget, protected QOpenGLFunctions
 {
     Q_OBJECT
 public:
     using QOpenGLWidget::QOpenGLWidget;
     explicit Viewport();
+    explicit Viewport(Axis axis, float angle);
+    explicit Viewport(QList<AxisRotation> rotations);
     virtual ~Viewport();
 
     void mousePressEvent(QMouseEvent *e) override;
@@ -29,6 +52,8 @@ public:
 
     void set_engine(GeometryEngine *engine);
     void create_point(QVector3D position, float scale);
+
+    static QVector3D get_axis(Axis axis);
 
 private:
     QBasicTimer timer_;

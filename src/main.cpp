@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
         out << document.toJson();
         out_file.close();
 
-        if (false)// if the flag is set
+        if (true)// if the flag is set
         {
             QSurfaceFormat format;
             format.setDepthBufferSize(24);

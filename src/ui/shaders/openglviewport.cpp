@@ -13,12 +13,36 @@ Viewport::Viewport()
 , texture_(nullptr)
 , camera_distance_(6.0f)
 {
+
+}
+
+Viewport::Viewport(Axis axis, float angle) : Viewport()
+{
+    rotation_ = QQuaternion::fromAxisAndAngle(Viewport::get_axis(axis), angle);
+}
+
+Viewport::Viewport(QList<AxisRotation> rotations) : Viewport()
+{
+    for (auto rotation : rotations)
+    {
+        auto axis = rotation.axis();
+        rotation_ = QQuaternion::fromAxisAndAngle(Viewport::get_axis(axis), rotation.angle()) * rotation_;
+    }
+}
+
+QVector3D Viewport::get_axis(Axis axis)
+{
+    switch (axis)
+    {
+        case Axis::X: return QVector3D(1, 0, 0);
+        case Axis::Y: return QVector3D(0, 1, 0);
+        default:
+        case Axis::Z: return QVector3D(0, 0, 1);
+    }
 }
 
 Viewport::~Viewport()
 {
-
-    delete engine_;
     delete texture_;
 }
 
@@ -66,13 +90,13 @@ void Viewport::paintGL()
 
 void Viewport::init_shaders()
 {
-    if (!program_.addShaderFromSourceFile(QOpenGLShader::Vertex, "../src/ui/shaders/vertex.vsh"))
+    if (!program_.addShaderFromSourceFile(QOpenGLShader::Vertex, "../../src/ui/shaders/vertex.vsh"))
     {
         qDebug() << "While initializing shaders: vertex shader failed to load.";
         close();
     }
 
-    if (!program_.addShaderFromSourceFile(QOpenGLShader::Fragment, "../src/ui/shaders/fragment.fsh"))
+    if (!program_.addShaderFromSourceFile(QOpenGLShader::Fragment, "../../src/ui/shaders/fragment.fsh"))
     {
         qDebug() << "While initializing shaders: fragment shader failed to load.";
         close();
@@ -93,7 +117,7 @@ void Viewport::init_shaders()
 
 void Viewport::init_textures()
 {
-    auto image = QImage("../src/ui/shaders/cube.png");
+    auto image = QImage("../../src/ui/shaders/cube.png");
     texture_ = new QOpenGLTexture(image.mirrored());
 
     texture_->setMinificationFilter(QOpenGLTexture::Nearest);
@@ -144,3 +168,7 @@ void Viewport::timerEvent(QTimerEvent *e)
 
     angular_speed_ = 0;
 }
+
+AxisRotation::AxisRotation(Axis rotation_axis, float rotation_angle) : axis_(rotation_axis), angle_(rotation_angle){}
+float AxisRotation::angle() const { return angle_; }
+Axis AxisRotation::axis() const { return axis_; }
