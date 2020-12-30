@@ -22,3 +22,16 @@ bool is_lower_extreme(NeutrinoPoint* point, double (NeutrinoPoint::*get_axis_val
 
     return (axis_value < axis_min_value);
 }
+
+double calculate_axis_center(NeutrinoPoint* min_point, NeutrinoPoint* max_point, double (NeutrinoPoint::*get_axis_value)() const)
+{
+    if (!min_point && !max_point) return 0;
+    if (!min_point) return (max_point->*get_axis_value)();
+    if (!max_point) return (min_point->*get_axis_value)();
+
+    auto max = (max_point->*get_axis_value)();
+    auto min = (min_point->*get_axis_value)();
+
+    auto range = max - min;
+    return max - (range/(double)2.0f);
+}

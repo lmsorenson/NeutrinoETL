@@ -225,3 +225,33 @@ void EventTests::test_calculate_extremes()
 
     delete event;
 }
+
+void EventTests::test_event_center()
+{
+    QMap<QString, double> point1;
+    point1.insert("TX", 1000);
+    point1.insert("TY", 1000);
+    point1.insert("TZ", 2000);
+    point1.insert("charge", 500.203);
+
+    QMap<QString, double> point2;
+    point2.insert("TX", -200);
+    point2.insert("TY", -200);
+    point2.insert("TZ", -200);
+    point2.insert("charge", 450);
+
+    NeutrinoTrack* track1 = new NeutrinoTrack(1);
+    track1->add_point(new NeutrinoPoint(point1));
+
+    NeutrinoTrack* track2 = new NeutrinoTrack(2);
+    track2->add_point(new NeutrinoPoint(point2));
+
+    NeutrinoEvent* event = new NeutrinoEvent(1001);
+    event->add_track(track1);
+    event->add_track(track2);
+    event->calculate_extremes();
+
+    QCOMPARE(event->event_center(), QVector3D(400, 400, 900));
+
+    delete event;
+}

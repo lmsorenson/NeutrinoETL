@@ -66,6 +66,17 @@ QPair<NeutrinoPoint*, NeutrinoPoint*> NeutrinoEvent::x_extremes() const { return
 QPair<NeutrinoPoint*, NeutrinoPoint*> NeutrinoEvent::y_extremes() const { return y_axis_extremes_; }
 QPair<NeutrinoPoint*, NeutrinoPoint*> NeutrinoEvent::z_extremes() const { return z_axis_extremes_; }
 
+
+
+QVector3D NeutrinoEvent::event_center() const
+{
+    auto x_coordinate = calculate_axis_center(x_axis_extremes_.first, x_axis_extremes_.second, &NeutrinoPoint::x);
+    auto y_coordinate = calculate_axis_center(y_axis_extremes_.first, y_axis_extremes_.second, &NeutrinoPoint::y);
+    auto z_coordinate = calculate_axis_center(z_axis_extremes_.first, z_axis_extremes_.second, &NeutrinoPoint::z);
+
+    return QVector3D(x_coordinate, y_coordinate, z_coordinate);
+}
+
 float NeutrinoEvent::get_max_charge() const
 {
     float max_charge = 0;

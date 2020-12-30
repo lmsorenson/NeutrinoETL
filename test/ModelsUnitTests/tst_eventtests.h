@@ -17,5 +17,6 @@ private slots:
     void test_get_max_charge();
     void test_to_json();
     void test_calculate_extremes();
+    void test_event_center();
 };
 
