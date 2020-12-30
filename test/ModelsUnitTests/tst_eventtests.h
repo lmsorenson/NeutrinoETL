@@ -16,5 +16,6 @@ private slots:
     void test_get_last_when_none_exist();
     void test_get_max_charge();
     void test_to_json();
+    void test_calculate_extremes();
 };
 

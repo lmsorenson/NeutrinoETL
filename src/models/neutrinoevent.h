@@ -15,6 +15,10 @@ public:
 
     NeutrinoTrack * last() const;
     QList<NeutrinoTrack *> get_tracks() const;
+    QPair<NeutrinoPoint*, NeutrinoPoint*> x_extremes() const;
+    QPair<NeutrinoPoint*, NeutrinoPoint*> y_extremes() const;
+    QPair<NeutrinoPoint*, NeutrinoPoint*> z_extremes() const;
+
     float get_max_charge() const;
 
     QJsonObject to_json() const;

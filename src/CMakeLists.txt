@@ -48,6 +48,8 @@ file(GLOB PROJECT_MOD_FILES
         models/neutrinotrack.h
         models/neutrinopoint.cpp
         models/neutrinopoint.h
+        models/helpers.cpp
+        models/helpers.h
         strategies/deserialize.cpp
         strategies/deserialize.h
         strategies/neutrinoeventdeserializerv1.cpp

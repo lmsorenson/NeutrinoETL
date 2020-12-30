@@ -20,7 +20,9 @@ file(GLOB PROJECT_MOD_FILES
         ${CMAKE_SOURCE_DIR}/src/models/neutrinotrack.cpp
         ${CMAKE_SOURCE_DIR}/src/models/neutrinotrack.h
         ${CMAKE_SOURCE_DIR}/src/models/neutrinopoint.cpp
-        ${CMAKE_SOURCE_DIR}/src/models/neutrinopoint.h)
+        ${CMAKE_SOURCE_DIR}/src/models/neutrinopoint.h
+        ${CMAKE_SOURCE_DIR}/src/models/helpers.cpp
+        ${CMAKE_SOURCE_DIR}/src/models/helpers.h)
 
 add_executable(ModelTests
         ${PROJECT_MOD_FILES}
