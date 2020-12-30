@@ -26,6 +26,71 @@ void TrackTests::test_add_point_to_track()
     delete track;
 }
 
+void TrackTests::test_extremes()
+{
+    QMap<QString, double> x_min_point;
+    x_min_point.insert("TX", -100);
+    x_min_point.insert("TY", 0);
+    x_min_point.insert("TZ", 100);
+    x_min_point.insert("charge", 500.203);
+
+    QMap<QString, double> x_max_point;
+    x_max_point.insert("TX", 1001);
+    x_max_point.insert("TY", 1);
+    x_max_point.insert("TZ", 1);
+    x_max_point.insert("charge", 450);
+
+    QMap<QString, double> y_min_point;
+    y_min_point.insert("TX", 0);
+    y_min_point.insert("TY", -112);
+    y_min_point.insert("TZ", 100);
+    y_min_point.insert("charge", 500.203);
+
+    QMap<QString, double> y_max_point;
+    y_max_point.insert("TX", 2);
+    y_max_point.insert("TY", 1777);
+    y_max_point.insert("TZ", 2);
+    y_max_point.insert("charge", 450);
+
+    QMap<QString, double> z_min_point;
+    z_min_point.insert("TX", 333);
+    z_min_point.insert("TY", 333);
+    z_min_point.insert("TZ", -333);
+    z_min_point.insert("charge", 500.203);
+
+    QMap<QString, double> z_max_point;
+    z_max_point.insert("TX", 333);
+    z_max_point.insert("TY", 333);
+    z_max_point.insert("TZ", 1333);
+    z_max_point.insert("charge", 450);
+
+    NeutrinoTrack* track = new NeutrinoTrack(2);
+    track->add_point(new NeutrinoPoint(x_min_point));
+    track->add_point(new NeutrinoPoint(x_max_point));
+    track->add_point(new NeutrinoPoint(y_min_point));
+    track->add_point(new NeutrinoPoint(y_max_point));
+    track->add_point(new NeutrinoPoint(z_min_point));
+    track->add_point(new NeutrinoPoint(z_max_point));
+
+    track->calculate_extremes();
+
+    auto x_min = track->x_extremes().first;
+    auto x_max = track->x_extremes().second;
+    auto y_min = track->y_extremes().first;
+    auto y_max = track->y_extremes().second;
+    auto z_min = track->z_extremes().first;
+    auto z_max = track->z_extremes().second;
+
+    QCOMPARE(x_min->x(), -100);
+    QCOMPARE(x_max->x(), 1001);
+    QCOMPARE(y_min->y(), -112);
+    QCOMPARE(y_max->y(), 1777);
+    QCOMPARE(z_min->z(), -333);
+    QCOMPARE(z_max->z(), 1333);
+
+    delete track;
+}
+
 void TrackTests::test_get_max_charge_greater_than_zero()
 {
     QMap<QString, double> point_map;

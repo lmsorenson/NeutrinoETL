@@ -145,6 +145,7 @@ void EventTests::test_to_json()
     event->add_track(track1);
     event->add_track(track2);
 
+    event->print();
     auto json = event->to_json();
 
     QCOMPARE(json.value("Id"), 3001);
