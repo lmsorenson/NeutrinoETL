@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
-#include <ui/shaders/openglviewport.h>
+#include <ui/openglviewport.h>
 #include <ui/geometry/cube.h>
 #include <models/neutrinopoint.h>
 
