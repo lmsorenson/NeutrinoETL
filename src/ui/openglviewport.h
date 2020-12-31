@@ -5,7 +5,7 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLFunctions>
 #include <QBasicTimer>
-#include "geometryengine.h"
+#include "geometry/geometryengine.h"
 
 enum Axis
 {

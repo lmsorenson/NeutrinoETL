@@ -10,7 +10,7 @@
 #include <QSurfaceFormat>
 
 #include <strategies/neutrinoeventdeserializerv1.h>
-#include <ui/shaders/openglviewport.h>
+#include <ui/openglviewport.h>
 
 int main(int argc, char *argv[])
 {

@@ -3,13 +3,6 @@ cmake_minimum_required(VERSION 3.5)
 project(UiTests LANGUAGES CXX)
 
 find_package(glfw3)
-if(NOT ${glfw3_FOUND})
-    message("using submodule")
-    add_subdirectory(../../packages/glfw ${CMAKE_BINARY_DIR}/glfw)
-else()
-    message("using found pacckage")
-endif()
-
 find_package(OpenGL REQUIRED)
 find_package(Qt5 COMPONENTS Widgets Test REQUIRED)
 
@@ -25,7 +18,15 @@ enable_testing()
 
 file(GLOB PROJECT_MOD_FILES
         ${CMAKE_SOURCE_DIR}/src/ui/openglviewport.cpp
-        ${CMAKE_SOURCE_DIR}/src/ui/openglviewport.h)
+        ${CMAKE_SOURCE_DIR}/src/ui/openglviewport.h
+        ${CMAKE_SOURCE_DIR}/src/ui/geometry/geometryengine.cpp
+        ${CMAKE_SOURCE_DIR}/src/ui/geometry/geometryengine.h
+        ${CMAKE_SOURCE_DIR}/src/ui/geometry/cube.cpp
+        ${CMAKE_SOURCE_DIR}/src/ui/geometry/cube.h
+        ${CMAKE_SOURCE_DIR}/src/ui/geometry/mesh.cpp
+        ${CMAKE_SOURCE_DIR}/src/ui/geometry/mesh.h
+        ${CMAKE_SOURCE_DIR}/src/ui/geometry/vertex.cpp
+        ${CMAKE_SOURCE_DIR}/src/ui/geometry/vertex.h)
 
 add_executable(UiTests
         ${PROJECT_MOD_FILES}

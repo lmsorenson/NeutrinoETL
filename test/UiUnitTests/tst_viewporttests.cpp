@@ -1,6 +1,6 @@
 #include "tst_viewporttests.h"
 
-#include <ui/shaders/openglviewport.h>
+#include <ui/openglviewport.h>
 
 ViewportTests::ViewportTests()
 {

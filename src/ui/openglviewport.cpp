@@ -3,6 +3,7 @@
 #include <memory>
 #include <QOpenGLFunctions>
 #include <QMouseEvent>
+#include <ui/geometry/geometryengine.h>
 #include <ui/geometry/cube.h>
 
 #include <cmath>

@@ -30,12 +30,12 @@ file(GLOB PROJECT_MOD_FILES
         ui/mainwindow.cpp
         ui/mainwindow.h
         ui/mainwindow.ui
-        ui/shaders/openglviewport.cpp
-        ui/shaders/openglviewport.h
-        ui/shaders/geometryengine.cpp
-        ui/shaders/geometryengine.h
+        ui/openglviewport.cpp
+        ui/openglviewport.h
         ui/shaders/vertex.vsh
         ui/shaders/fragment.fsh
+        ui/geometry/geometryengine.cpp
+        ui/geometry/geometryengine.h
         ui/geometry/vertex.cpp
         ui/geometry/vertex.h
         ui/geometry/mesh.cpp
