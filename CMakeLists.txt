@@ -35,3 +35,4 @@ set(ENV{PROJECT_MODS} ${PROJECT_MOD_FILES})
 
 add_subdirectory(src)
 add_subdirectory(test/ModelsUnitTests)
+add_subdirectory(test/UiUnitTests)
