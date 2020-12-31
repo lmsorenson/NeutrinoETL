@@ -51,6 +51,7 @@ public:
     void init_textures();
 
     void set_engine(GeometryEngine *engine);
+    void set_camera_position(QVector3D new_position);
     void create_point(QVector3D position, float scale);
 
     static QVector3D get_axis(Axis axis);
@@ -64,7 +65,9 @@ private:
     float camera_distance_;
     QMatrix4x4 projection_;
 
-    QQuaternion rotation_;
+    QQuaternion camera_rotation_;
+    QVector3D camera_position_;
+
     QVector3D rotation_axis_;
     qreal angular_speed_ = 0;
     QVector2D mouse_press_position_;

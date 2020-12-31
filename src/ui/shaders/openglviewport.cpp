@@ -11,14 +11,15 @@ Viewport::Viewport()
 : QOpenGLWidget()
 , engine_(nullptr)
 , texture_(nullptr)
-, camera_distance_(6.0f)
+, camera_distance_(450)
+, camera_position_(QVector3D())
 {
 
 }
 
 Viewport::Viewport(Axis axis, float angle) : Viewport()
 {
-    rotation_ = QQuaternion::fromAxisAndAngle(Viewport::get_axis(axis), angle);
+    camera_rotation_ = QQuaternion::fromAxisAndAngle(Viewport::get_axis(axis), angle);
 }
 
 Viewport::Viewport(QList<AxisRotation> rotations) : Viewport()
@@ -26,7 +27,7 @@ Viewport::Viewport(QList<AxisRotation> rotations) : Viewport()
     for (auto rotation : rotations)
     {
         auto axis = rotation.axis();
-        rotation_ = QQuaternion::fromAxisAndAngle(Viewport::get_axis(axis), rotation.angle()) * rotation_;
+        camera_rotation_ = QQuaternion::fromAxisAndAngle(Viewport::get_axis(axis), rotation.angle()) * camera_rotation_;
     }
 }
 
@@ -80,11 +81,14 @@ void Viewport::paintGL()
 
     texture_->bind();
 
-    QMatrix4x4 view;
-    view.translate(0.0f, 0.0f, -1 * camera_distance_);
-    view.rotate(rotation_);
+    QMatrix4x4 model;
+    model.translate(-1 * camera_position_);
 
-    if (engine_) engine_->draw_geometry(&program_, projection_ * view);
+    QMatrix4x4 view;
+    view.translate(0, 0, -1 * camera_distance_);
+    view.rotate(camera_rotation_);
+
+    if (engine_) engine_->draw_geometry(&program_, projection_ * view * model);
 }
 
 void Viewport::init_shaders()
@@ -135,6 +139,11 @@ void Viewport::set_engine(GeometryEngine *engine)
     }
 }
 
+void Viewport::set_camera_position(QVector3D new_position)
+{
+    camera_position_ = new_position;
+}
+
 void Viewport::create_point(QVector3D position, float scale)
 {
     if (engine_) engine_->add_geometry(new Cube(position, QVector3D(scale, scale, scale)));
@@ -164,7 +173,7 @@ void Viewport::mouseMoveEvent(QMouseEvent *e)
 
 void Viewport::timerEvent(QTimerEvent *e)
 {
-    rotation_ = QQuaternion::fromAxisAndAngle(rotation_axis_, angular_speed_) * rotation_;
+    camera_rotation_ = QQuaternion::fromAxisAndAngle(rotation_axis_, angular_speed_) * camera_rotation_;
 
     update();
 

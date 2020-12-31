@@ -65,12 +65,14 @@ int main(int argc, char *argv[])
 
             QList<NeutrinoPoint*> list;
 
-            for(auto track : events.first()->get_tracks())
+            auto event = events.last();
+
+            for(auto track : event->get_tracks())
             {
                 list.append(track->get_points());
             }
 
-            window.add_points(list);
+            window.add_points(event->event_center(), list);
             return a.exec();
         }
 

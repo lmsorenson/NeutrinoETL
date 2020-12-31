@@ -14,7 +14,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void add_points(QList<class NeutrinoPoint*> points);
+    void add_points(QVector3D view_target, QList<class NeutrinoPoint*> points);
 
 private:
     Ui::MainWindow *ui;

@@ -19,6 +19,7 @@ public:
     QPair<NeutrinoPoint*, NeutrinoPoint*> x_extremes() const;
     QPair<NeutrinoPoint*, NeutrinoPoint*> y_extremes() const;
     QPair<NeutrinoPoint*, NeutrinoPoint*> z_extremes() const;
+    QVector3D track_center() const;
 
     double get_max_charge() const;
     double total_charge() const;

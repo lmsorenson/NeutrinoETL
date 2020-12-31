@@ -25,20 +25,30 @@ MainWindow::MainWindow(QWidget *parent)
     ui->gridLayout->addWidget(perspective_viewport_, 1, 1);
 }
 
-void MainWindow::add_points(QList<NeutrinoPoint*> points)
+void MainWindow::add_points(QVector3D view_target, QList<NeutrinoPoint*> points)
 {
-//    for(auto point : points)
-//    {
-//        viewport_->create_point(QVector3D(point->x(), point->y(), point->z()), point->charge() * .001);
-//    }
+    qDebug() << view_target;
     engine_ = new GeometryEngine();
 
     front_viewport_->set_engine(engine_);
-    right_viewport_->set_engine(engine_);
-    left_viewport_->set_engine(engine_);
-    perspective_viewport_->set_engine(engine_);
+    front_viewport_->set_camera_position(view_target);
 
-    front_viewport_->create_point(QVector3D(0, 0, 0), 1);
+    right_viewport_->set_engine(engine_);
+    right_viewport_->set_camera_position(view_target);
+
+    left_viewport_->set_engine(engine_);
+    left_viewport_->set_camera_position(view_target);
+
+    perspective_viewport_->set_engine(engine_);
+    perspective_viewport_->set_camera_position(view_target);
+
+//    front_viewport_->create_point(view_target, 1);
+
+    for(auto point : points)
+    {
+        qDebug() << "point added" << QVector3D(point->x(), point->y(), point->z());
+        front_viewport_->create_point(QVector3D(point->x(), point->y(), point->z()), point->charge() * 0.0009);
+    }
 }
 
 
