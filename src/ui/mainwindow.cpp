@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+#include <QSizePolicy>
+
 #include <ui/openglviewport.h>
 #include <ui/geometry/cube.h>
 #include <models/neutrinopoint.h>
@@ -12,17 +14,24 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     front_viewport_ = new Viewport(Axis::X, 0);
+    front_viewport_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
     right_viewport_ = new Viewport(Axis::Y, -90);
+    right_viewport_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
     left_viewport_ = new Viewport(Axis::Y, 90);
+    left_viewport_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
     perspective_viewport_ = new Viewport( {
         AxisRotation(Axis::Y, 45),
         AxisRotation(Axis::X, 30)
     });
+    perspective_viewport_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    ui->gridLayout->addWidget(front_viewport_, 0,0);
-    ui->gridLayout->addWidget(right_viewport_, 0,1);
-    ui->gridLayout->addWidget(left_viewport_, 1,0);
-    ui->gridLayout->addWidget(perspective_viewport_, 1, 1);
+    ui->viewport_grid->addWidget(front_viewport_, 0,0);
+    ui->viewport_grid->addWidget(right_viewport_, 0,1);
+    ui->viewport_grid->addWidget(left_viewport_, 1,0);
+    ui->viewport_grid->addWidget(perspective_viewport_, 1, 1);
 }
 
 void MainWindow::add_points(QVector3D view_target, QList<NeutrinoPoint*> points)
