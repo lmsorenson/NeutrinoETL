@@ -77,7 +77,7 @@ QVector3D NeutrinoEvent::event_center() const
     return QVector3D(x_coordinate, y_coordinate, z_coordinate);
 }
 
-float NeutrinoEvent::get_max_charge() const
+double NeutrinoEvent::get_max_charge() const
 {
     float max_charge = 0;
 
@@ -89,6 +89,29 @@ float NeutrinoEvent::get_max_charge() const
     }
 
     return max_charge;
+}
+
+double NeutrinoEvent::total_charge() const
+{
+    double total_charge = 0;
+
+    for(auto point : tracks_)
+        total_charge = total_charge + point->total_charge();
+
+    return total_charge;
+}
+
+double NeutrinoEvent::track_density() const
+{
+    double x_dimension = x_axis_extremes_.second->x() - x_axis_extremes_.first->x();
+    double y_dimension = y_axis_extremes_.second->y() - y_axis_extremes_.first->y();
+    double z_dimension = z_axis_extremes_.second->z() - z_axis_extremes_.first->z();
+
+    double track_volume = x_dimension * y_dimension * z_dimension;
+
+    double track_density = total_charge() / track_volume;
+
+    return track_density;
 }
 
 QJsonObject NeutrinoEvent::to_json() const
@@ -103,8 +126,18 @@ QJsonObject NeutrinoEvent::to_json() const
     }
 
     object.insert("Tracks", tracks);
-    object.insert("TotalCharge", 0);
-    object.insert("EventDensity", 0);
+
+    QJsonObject meta;
+    meta.insert("XAxisMinimum", x_axis_extremes_.first->x());
+    meta.insert("XAxisMaximum", x_axis_extremes_.second->x());
+    meta.insert("YAxisMinimum", y_axis_extremes_.first->y());
+    meta.insert("YAxisMaximum", y_axis_extremes_.second->y());
+    meta.insert("ZAxisMinimum", z_axis_extremes_.first->z());
+    meta.insert("ZAxisMaximum", z_axis_extremes_.second->z());
+    meta.insert("TotalCharge", this->total_charge());
+    meta.insert("TrackDensity", this->track_density());
+
+    object.insert("Metadata", meta);
 
     return object;
 }

@@ -20,7 +20,9 @@ public:
     QPair<NeutrinoPoint*, NeutrinoPoint*> z_extremes() const;
     QVector3D event_center() const;
 
-    float get_max_charge() const;
+    double get_max_charge() const;
+    double total_charge() const;
+    double track_density() const;
 
     QJsonObject to_json() const;
     void print() const;
