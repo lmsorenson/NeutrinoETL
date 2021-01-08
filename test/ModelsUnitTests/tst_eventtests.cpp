@@ -145,6 +145,7 @@ void EventTests::test_to_json()
     event->add_track(track1);
     event->add_track(track2);
 
+    event->calculate_extremes();
     event->print();
     auto json = event->to_json();
 

@@ -120,8 +120,10 @@ QJsonObject NeutrinoEvent::to_json() const
     object.insert("Id", QJsonValue::fromVariant(this->id_));
 
     QJsonArray tracks;
+
     for(int i = 0; i < tracks_.size(); ++i)
     {
+        tracks_[i]->calculate_extremes();
         tracks.append(tracks_[i]->to_json());
     }
 
@@ -136,7 +138,6 @@ QJsonObject NeutrinoEvent::to_json() const
     meta.insert("ZAxisMaximum", z_axis_extremes_.second->z());
     meta.insert("TotalCharge", this->total_charge());
     meta.insert("TrackDensity", this->track_density());
-
     object.insert("Metadata", meta);
 
     return object;
