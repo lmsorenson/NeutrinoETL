@@ -74,11 +74,15 @@ double NeutrinoTrack::total_charge() const
 
 double NeutrinoTrack::track_density() const
 {
+    // subtract the max from the min on each axis to get the dimensions.
     double x_dimension = x_axis_extremes_.second->x() - x_axis_extremes_.first->x();
     double y_dimension = y_axis_extremes_.second->y() - y_axis_extremes_.first->y();
     double z_dimension = z_axis_extremes_.second->z() - z_axis_extremes_.first->z();
 
     double track_volume = x_dimension * y_dimension * z_dimension;
+
+    // if track_volume is 0 track density is undefined.
+    if (track_volume == 0) return -999.;
 
     double track_density = total_charge() / track_volume;
 
