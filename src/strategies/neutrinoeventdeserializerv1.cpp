@@ -4,7 +4,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
-#include <src/models/neutrinoevent.h>
+#include <models/neutrinoevent.h>
 
 NeutrinoEventDeserializerV1::NeutrinoEventDeserializerV1(QObject *parent) : Deserializer(parent)
 {
@@ -20,7 +20,7 @@ QList<NeutrinoEvent *> NeutrinoEventDeserializerV1::deserialize(QString content)
     {
         auto event_prefix = QString("event ID");
         auto id_prefix = QString("track ID");
-        auto prefix = QString("Point no");
+        auto point_prefix = QString("Point no");
         auto record = QString(array[i]).trimmed();
 
         if (record.startsWith(event_prefix))
@@ -36,15 +36,19 @@ QList<NeutrinoEvent *> NeutrinoEventDeserializerV1::deserialize(QString content)
         if (record.startsWith(id_prefix))
             this->on_new_track(event_list.last(), QStringRef(&record, id_prefix.size(), record.size() - id_prefix.size()).toString());
 
-        if (record.startsWith(prefix) && !event_list.isEmpty())
+        if (record.startsWith(point_prefix) && !event_list.isEmpty())
         {
             auto latest_track = event_list.last();
-            this->on_new_point(latest_track->last(), QStringRef(&record, prefix.size(), record.size() - prefix.size()).toString());
+            this->on_new_point(latest_track->last(), QStringRef(&record, point_prefix.size(), record.size() - point_prefix.size()).toString());
         }
     }
 
     for (int i=0; i < event_list.size(); ++i)
+    {
+        event_list[i]->calculate_extremes();
         event_list[i]->print();
+    }
+
 
     return event_list;
 }
@@ -65,10 +69,10 @@ void NeutrinoEventDeserializerV1::on_new_point(NeutrinoTrack *track, QString dat
     if (track == nullptr) return;
 
     bool ok;
-    QMap<QString, float> map = QMap<QString, float>();
+    QMap<QString, double> map = QMap<QString, double>();
     auto parts = data.trimmed().split(" ");
 
-    float point_no = parts.takeFirst().toFloat(&ok);
+    double point_no = parts.takeFirst().toDouble(&ok);
     if (!ok) return;
 
     map.insert("Point no", point_no);
@@ -76,7 +80,7 @@ void NeutrinoEventDeserializerV1::on_new_point(NeutrinoTrack *track, QString dat
     for(int i = 0; i+1 < parts.size(); i += 2)
     {
         auto label = parts[i];
-        float value = parts[i+1].toFloat(&ok);
+        double value = (double)parts[i+1].toDouble(&ok);
         if (!ok) return;
 
         map.insert(label, value);

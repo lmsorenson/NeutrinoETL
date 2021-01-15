@@ -1,6 +1,21 @@
 language: cpp
 os: osx
-osx_image: xcode12.2
+addons:
+  homebrew:
+    packages:
+      - glfw
+      - qt
+    update: true
+  apt:
+    packages:
+      - cmake
+      - libxrandr2
+      - libxrandr-dev
+      - libxinerama-dev
+      - libxcursor-dev
+      - libxi-dev
+      - qt5-default
+    update: true
 env:
   global:
     - DEPLOY_VERSION=$(<version.txt)
@@ -8,18 +23,26 @@ jobs:
   include:
     - os: osx
       osx_image: xcode12.2
-addons:
-  homebrew:
-    packages:
-      - glfw
-      - qt
-    update: true
-before_script:
-  - brew upgrade qt
-  - mkdir build
-  - cd build
-script:
-  - |
-    cmake \
-    -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 \
-    ..
+      script:
+        - pwd
+        - ls
+        - mkdir build
+        - cd build
+        - |
+          cmake \
+          -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 \
+          ..
+        - make
+        - ./test/ModelsUnitTests/ModelTests
+        - ./test/UiUnitTests/UiTests
+    - os: linux
+      dist: focal
+      script:
+        - mkdir build
+        - cd build
+        - |
+          cmake \
+          ..
+          make
+        - ./test/ModelsUnitTests/ModelTests
+        - ./test/UiUnitTests/UiTests

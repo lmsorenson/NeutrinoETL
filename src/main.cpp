@@ -1,4 +1,4 @@
-#include <src/ui/mainwindow.h>
+#include <ui/mainwindow.h>
 
 #include <QApplication>
 #include <QDebug>
@@ -9,8 +9,8 @@
 #include <QJsonDocument>
 #include <QSurfaceFormat>
 
-#include <src/strategies/neutrinoeventdeserializerv1.h>
-#include <src/ui/shaders/openglviewport.h>
+#include <strategies/neutrinoeventdeserializerv1.h>
+#include <ui/openglviewport.h>
 
 int main(int argc, char *argv[])
 {
@@ -38,9 +38,15 @@ int main(int argc, char *argv[])
         QJsonArray json_array;
 
         for (int i=0; i < events.size(); ++i)
+        {
             json_array.append(events[i]->to_json());
+            qDebug() << "Max Charge for event " << i << ": " << events[i]->get_max_charge();
+        }
 
-        QJsonDocument document(json_array);
+        QJsonObject object;
+        object.insert("EventList", QJsonValue::fromVariant(json_array));
+
+        QJsonDocument document(object);
         QFile out_file(write_path);
         out_file.open(QIODevice::WriteOnly | QIODevice::Text);
 
@@ -56,6 +62,17 @@ int main(int argc, char *argv[])
             QApplication a(argc, argv);
             MainWindow window;
             window.show();
+
+            QList<NeutrinoPoint*> list;
+
+            auto event = events.last();
+
+            for(auto track : event->get_tracks())
+            {
+                list.append(track->get_points());
+            }
+
+            window.add_points(event->event_center(), list);
             return a.exec();
         }
 

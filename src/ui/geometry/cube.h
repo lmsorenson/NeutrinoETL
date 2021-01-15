@@ -1,17 +1,20 @@
 #pragma once
 
 #include <QObject>
-#include <QVector3D>
-#include <src/ui/geometry/vertex.h>
 #include <GLFW/glfw3.h>
+#include <QVector3D>
+#include <ui/geometry/vertex.h>
+#include <ui/geometry/mesh.h>
 
-class Cube : public QObject
+class Cube : public Mesh
 {
     Q_OBJECT
 public:
-    Cube();
-    virtual ~Cube() = default;
+    Cube(QVector3D position = QVector3D(0, 0, 0), QVector3D scale = QVector3D(1, 1, 1));
+    virtual ~Cube();
 
-    static Vertex *generate_vertices(QVector3D scale = QVector3D(1, 1, 1));
-    static GLushort *generate_indices();
+    virtual Vertex *generate_vertices() override;
+    virtual GLushort *generate_indices() override;
+
+private:
 };

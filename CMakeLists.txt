@@ -1,78 +1,38 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(NeutrinoETL LANGUAGES CXX)
+project(NeutrinoETLTool)
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+file(GLOB PROJECT_MOD_FILES
+        main.cpp
+        ui/mainwindow.cpp
+        ui/mainwindow.h
+        ui/mainwindow.ui
+        ui/shaders/openglviewport.cpp
+        ui/shaders/openglviewport.h
+        ui/shaders/geometryengine.cpp
+        ui/shaders/geometryengine.h
+        ui/shaders/vertex.vsh
+        ui/shaders/fragment.fsh
+        ui/geometry/vertex.cpp
+        ui/geometry/vertex.h
+        ui/geometry/mesh.cpp
+        ui/geometry/mesh.h
+        ui/geometry/cube.cpp
+        ui/geometry/cube.h
+        models/neutrinoevent.cpp
+        models/neutrinoevent.h
+        models/neutrinotrack.cpp
+        models/neutrinotrack.h
+        models/neutrinopoint.cpp
+        models/neutrinopoint.h
+        strategies/deserialize.cpp
+        strategies/deserialize.h
+        strategies/neutrinoeventdeserializerv1.cpp
+        strategies/neutrinoeventdeserializerv1.h
+        ${TS_FILES}
+        )
+set(ENV{PROJECT_MODS} ${PROJECT_MOD_FILES})
 
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-find_package(glfw3 REQUIRED)
-find_package(OpenGL REQUIRED)
-find_package(Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
-
-set(TS_FILES NeutrinoETL_en_US.ts)
-
-if(ANDROID)
-  add_library(NeutrinoETL SHARED
-    main.cpp
-    src/ui/mainwindow.cpp
-    src/ui/mainwindow.h
-    src/ui/mainwindow.ui
-    src/ui/shaders/openglviewport.cpp
-    src/ui/shaders/openglviewport.h
-    src/ui/shaders/geometryengine.cpp
-    src/ui/shaders/geometryengine.h
-    src/ui/shaders/vertex.vsh
-    src/ui/shaders/fragment.fsh
-    src/ui/geometry/vertex.cpp
-    src/ui/geometry/vertex.h
-    src/ui/geometry/cube.cpp
-    src/ui/geometry/cube.h
-    src/models/neutrinotrack.cpp
-    src/models/neutrinotrack.h
-    src/models/neutrinopoint.cpp
-    src/models/neutrinopoint.h
-    src/strategies/deserialize.cpp
-    src/strategies/deserialize.h
-    src/strategies/neutrinoeventdeserializerv1.cpp
-    src/strategies/neutrinoeventdeserializerv1.h
-    ${TS_FILES}
-  )
-else()
-  add_executable(NeutrinoETL
-    main.cpp
-    src/ui/mainwindow.cpp
-    src/ui/mainwindow.h
-    src/ui/mainwindow.ui
-    src/ui/shaders/openglviewport.cpp
-    src/ui/shaders/openglviewport.h
-    src/ui/shaders/geometryengine.cpp
-    src/ui/shaders/geometryengine.h
-    src/ui/shaders/vertex.vsh
-    src/ui/shaders/fragment.fsh
-    src/ui/geometry/vertex.cpp
-    src/ui/geometry/vertex.h
-    src/ui/geometry/cube.cpp
-    src/ui/geometry/cube.h
-    src/models/neutrinoevent.cpp
-    src/models/neutrinoevent.h
-    src/models/neutrinotrack.cpp
-    src/models/neutrinotrack.h
-    src/models/neutrinopoint.cpp
-    src/models/neutrinopoint.h
-    src/strategies/deserialize.cpp
-    src/strategies/deserialize.h
-    src/strategies/neutrinoeventdeserializerv1.cpp
-    src/strategies/neutrinoeventdeserializerv1.h
-    ${TS_FILES}
-  )
-endif()
-
-target_link_libraries(NeutrinoETL PRIVATE Qt5::Widgets Qt5::Gui glfw OpenGL::GL)
-
-qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+add_subdirectory(src)
+add_subdirectory(test/ModelsUnitTests)
+add_subdirectory(test/UiUnitTests)

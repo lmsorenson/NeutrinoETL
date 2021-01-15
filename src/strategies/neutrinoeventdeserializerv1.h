@@ -1,7 +1,7 @@
 #pragma once
 #include <QObject>
-#include <src/models/neutrinoevent.h>
-#include <src/strategies/deserialize.h>
+#include <models/neutrinoevent.h>
+#include <strategies/deserialize.h>
 
 class NeutrinoEventDeserializerV1 : public Deserializer
 {

@@ -3,17 +3,23 @@
 #include <QObject>
 #include <QMap>
 
-class NeutrinoPoint : QObject
+class NeutrinoPoint : public QObject
 {
     Q_OBJECT
 public:
-    NeutrinoPoint(QMap<QString, float> point_map);
-    virtual ~NeutrinoPoint() = default;
+    NeutrinoPoint(QMap<QString, double> point_map);
+    virtual ~NeutrinoPoint();
 
-    QJsonObject to_json();
-    void print();
+    int32_t id() const;
+    double x() const;
+    double y() const;
+    double z() const;
+    double charge() const;
 
+    QJsonObject to_json() const;
+    void print() const;
 private:
-    float id_, x_, y_, z_, charge_;
+    int32_t id_;
+    double x_, y_, z_, charge_;
 };
 
